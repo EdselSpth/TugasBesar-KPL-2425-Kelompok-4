@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35806.99 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TugasBesar-KPL-2425-Kelompok-4", "TugasBesar-KPL-2425-Kelompok-4\TugasBesar-KPL-2425-Kelompok-4.csproj", "{234A5A73-D7CD-4B41-BDA5-82CE5EAC7B35}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{234A5A73-D7CD-4B41-BDA5-82CE5EAC7B35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{234A5A73-D7CD-4B41-BDA5-82CE5EAC7B35}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{234A5A73-D7CD-4B41-BDA5-82CE5EAC7B35}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{234A5A73-D7CD-4B41-BDA5-82CE5EAC7B35}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AB766623-CD07-47DB-B7C0-45AD11EC5107}
+	EndGlobalSection
+EndGlobal
