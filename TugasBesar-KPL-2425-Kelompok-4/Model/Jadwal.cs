@@ -10,12 +10,12 @@ namespace TugasBesar_KPL_2425_Kelompok_4.Model
 {
     class Jadwal 
     {
-        public DateTime Tanggal { get; set; }
+        public DateOnly Tanggal { get; set; }
         public List<JenisSampah> jenisSampahList { get; set; }
         public pengguna kurirPengambil { get; set; }
         public string areaDiambil { get; set; }
 
-        public Jadwal(DateTime tanggalInput, List<JenisSampah> jenisSampahListInput, string areaDiambilInput, pengguna kurirPengambilInput)
+        public Jadwal(DateOnly tanggalInput, List<JenisSampah> jenisSampahListInput, string areaDiambilInput, pengguna kurirPengambilInput)
         {
             Debug.Assert(jenisSampahListInput != null, "Jenis Sampah yang diambil tidak boleh kosong");
             if (jenisSampahListInput == null)
@@ -35,8 +35,8 @@ namespace TugasBesar_KPL_2425_Kelompok_4.Model
                 throw new ArgumentException("Hanya Kurir yang bisa mengambil sampah");
             }
 
-            Debug.Assert(tanggalInput >= DateTime.Now.Date, "Tanggal tidak boleh Berada di masa lalu");
-            if (tanggalInput < DateTime.Now.Date)
+            Debug.Assert(tanggalInput >= DateOnly.FromDateTime(DateTime.Now), "Tanggal tidak boleh Berada di masa lalu");
+            if (tanggalInput < DateOnly.FromDateTime(DateTime.Now))
             {
                 throw new ArgumentOutOfRangeException(nameof(tanggalInput), "Tanggal tidak boleh berada di masa lalu");
             }
@@ -59,9 +59,6 @@ namespace TugasBesar_KPL_2425_Kelompok_4.Model
             areaDiambil = areaDiambilInput;
         }
 
-        public Jadwal()
-        {
-            
-        }
+        public Jadwal(){ }
     }
 }
