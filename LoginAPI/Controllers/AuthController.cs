@@ -24,5 +24,20 @@ namespace LoginAPI.Controllers
 
             return Ok(new { message = "Login berhasil!!", username = user.Username });
         }
+        [HttpPost("register")]
+        public IActionResult Register([FromBody] User newUser)
+        {
+            var terdaftar = users.FirstOrDefault(u => u.Username == newUser.Username);
+
+            if (terdaftar != null)
+            {
+                return Conflict(new { message = "Username sudah terdaftar" });
+            }
+
+            newUser.Id = users.Count + 1;
+            users.Add(newUser);
+
+            return Ok(new { message = "Register berhasil!!", username = newUser.Username });
+        }
     }
 }
