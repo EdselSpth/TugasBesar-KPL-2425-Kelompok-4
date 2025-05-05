@@ -1,0 +1,6 @@
+@JadwalAPI_HostAddress = http://localhost:5009
+
+GET {{JadwalAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
