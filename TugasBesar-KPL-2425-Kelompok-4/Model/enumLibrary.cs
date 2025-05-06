@@ -23,4 +23,17 @@ namespace TugasBesar_KPL_2425_Kelompok_4.Model
         Kurir,
         Pengguna,
     }
+
+    public enum Pembayaran
+    {
+        Tunai,
+        Bca,
+        Mandiri,
+        Bni,
+        Bsi,
+        Bri,
+        ShopeePay,
+        Gopay,
+        Dana,
+    }
 }
