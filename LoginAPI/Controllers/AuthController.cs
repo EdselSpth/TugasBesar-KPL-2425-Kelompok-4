@@ -1,5 +1,7 @@
 ﻿using LoginAPI.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace LoginAPI.Controllers
 {
@@ -9,27 +11,35 @@ namespace LoginAPI.Controllers
     {
         private static List<User> users = new List<User>
         {
-            new User {Username = "admin", Password = "1234"}
+            new User { Id = 1, Username = "admin", Password = "1234", Role = Role.Admin }
         };
 
         [HttpPost("login")]
         public IActionResult Login([FromBody] User loginUser)
         {
-            var user = users.FirstOrDefault(u => u.Username == loginUser.Username && u.Password == loginUser.Password);
+            var state = LoginState.Awal;
+            state = StateBasedAuth.GetNextState(state, LoginTrigger.Submit);
+            state = StateBasedAuth.GetNextState(state,
+                users.Any(u => u.Username == loginUser.Username && u.Password == loginUser.Password)
+                ? LoginTrigger.Valid
+                : LoginTrigger.Invalid);
 
-            if (user == null)
+            if (state == LoginState.Berhasil)
             {
-                return Unauthorized(new { message = "Username atau Password salah" });
+                var user = users.First(u => u.Username == loginUser.Username);
+                return Ok(new { message = "Login berhasil!", username = user.Username, role = user.Role });
             }
-
-            return Ok(new { message = "Login berhasil!!", username = user.Username });
+            else
+            {
+                return Unauthorized(new { message = "Username atau password salah" });
+            }
         }
+
         [HttpPost("register")]
         public IActionResult Register([FromBody] User newUser)
         {
-            var terdaftar = users.FirstOrDefault(u => u.Username == newUser.Username);
-
-            if (terdaftar != null)
+            var existingUser = users.FirstOrDefault(u => u.Username == newUser.Username);
+            if (existingUser != null)
             {
                 return Conflict(new { message = "Username sudah terdaftar" });
             }
@@ -37,7 +47,7 @@ namespace LoginAPI.Controllers
             newUser.Id = users.Count + 1;
             users.Add(newUser);
 
-            return Ok(new { message = "Register berhasil!!", username = newUser.Username });
+            return Ok(new { message = "Register berhasil!", username = newUser.Username, role = newUser.Role });
         }
     }
 }
