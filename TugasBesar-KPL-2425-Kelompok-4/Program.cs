@@ -1,4 +1,6 @@
-﻿namespace TugasBesar_KPL_2425_Kelompok_4
+﻿using TugasBesar_KPL_2425_Kelompok_4.Penarikan_Keuntungan;
+
+namespace TugasBesar_KPL_2425_Kelompok_4
 {
         class Program
     {
@@ -13,6 +15,9 @@
             Console.WriteLine("Abdul Azis Saepurohmat - 103022300092");
             Console.WriteLine("Tio Funny Tinambunan - 103022330036");
             Console.WriteLine("=====================================\n");
+
+            PenarikanCustomer.StateBasedPenarikanCustomer();
+            PenarikanAdmin.StateBasedPenarikanAdmin();
         }
     }
 }
