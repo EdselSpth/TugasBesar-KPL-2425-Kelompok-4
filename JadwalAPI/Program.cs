@@ -1,14 +1,19 @@
+using JadwalAPI.Configuration; // Tambahkan ini
 using JadwalAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Tambahkan konfigurasi JadwalSettings
+builder.Services.Configure<JadwalSettings>(
+    builder.Configuration.GetSection("JadwalSettings"));
 
+// Tambahkan service JadwalService
+builder.Services.AddSingleton<IJadwalService, JadwalService>();
+
+// Add services to the container.
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddSingleton<IJadwalService, JadwalService>();
 
 var app = builder.Build();
 
@@ -20,9 +25,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();

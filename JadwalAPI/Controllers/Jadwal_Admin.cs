@@ -5,23 +5,27 @@ using JadwalAPI.Services;
 namespace JadwalAPI.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
-    public class Jadwal_Admin : ControllerBase
+    [Route("api/jadwal_admin")]
+    public class JadwalAdminController : ControllerBase
     {
         private readonly IJadwalService _jadwalService;
 
-        public Jadwal_Admin(IJadwalService jadwalService)
+        public JadwalAdminController(IJadwalService jadwalService)
         {
             _jadwalService = jadwalService;
         }
 
         [HttpGet]
+        [ProducesResponseType(typeof(List<JadwalModel>), 200)]
         public ActionResult<List<JadwalModel>> GetAll()
         {
             return Ok(_jadwalService.GetAll());
         }
 
         [HttpGet("{tanggal}")]
+        [ProducesResponseType(typeof(JadwalModel), 200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
         public ActionResult<JadwalModel> GetByTanggal(string tanggal)
         {
             if (!DateOnly.TryParse(tanggal, out DateOnly parsedDate))
@@ -35,13 +39,21 @@ namespace JadwalAPI.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(typeof(JadwalModel), 201)]
+        [ProducesResponseType(400)]
         public ActionResult AddJadwal([FromBody] JadwalModel jadwal)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             _jadwalService.TambahJadwal(jadwal);
             return CreatedAtAction(nameof(GetByTanggal), new { tanggal = jadwal.Tanggal.ToString("yyyy-MM-dd") }, jadwal);
         }
 
         [HttpPut("{tanggal}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
         public ActionResult UpdateJadwal(string tanggal, [FromBody] JadwalModel updatedJadwal)
         {
             if (!DateOnly.TryParse(tanggal, out DateOnly parsedDate))
@@ -55,6 +67,9 @@ namespace JadwalAPI.Controllers
         }
 
         [HttpDelete("{tanggal}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
         public ActionResult DeleteJadwal(string tanggal)
         {
             if (!DateOnly.TryParse(tanggal, out DateOnly parsedDate))
