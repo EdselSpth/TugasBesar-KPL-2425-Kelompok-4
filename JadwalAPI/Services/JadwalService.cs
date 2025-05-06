@@ -1,7 +1,7 @@
 ﻿using JadwalAPI.Model;
 using JadwalAPI.Configuration;
 using Microsoft.Extensions.Options;
-using TugasBesar_KPL_2425_Kelompok_4.Model;
+using modelLibrary;
 
 namespace JadwalAPI.Services
 {

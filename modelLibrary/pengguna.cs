@@ -5,9 +5,8 @@ using System.Linq;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
-using TugasBesar_KPL_2425_Kelompok_4.Model;
 
-namespace TugasBesar_KPL_2425_Kelompok_4.Model
+namespace modelLibrary
 {
     class pengguna
     {
