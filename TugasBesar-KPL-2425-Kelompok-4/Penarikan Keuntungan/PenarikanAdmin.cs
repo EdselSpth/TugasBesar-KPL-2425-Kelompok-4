@@ -36,12 +36,12 @@ namespace TugasBesar_KPL_2425_Kelompok_4.Penarikan_Keuntungan
                         break;
 
                     case PenarikanState.DITERIMA:
-                        Console.WriteLine("✅ Permintaan penarikan disetujui! Transaksi berhasil.");
+                        Console.WriteLine("Permintaan penarikan disetujui! Transaksi berhasil.");
                         currentState = StateBasedPenarikan.GetNextState(currentState, PenarikanTrigger.TRANSFER);
                         return;
 
                     case PenarikanState.DITOLAK:
-                        Console.WriteLine("❌ Permintaan penarikan ditolak.");
+                        Console.WriteLine("Permintaan penarikan ditolak.");
                         return;
                 }
             }

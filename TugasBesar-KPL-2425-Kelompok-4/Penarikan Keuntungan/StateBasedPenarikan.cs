@@ -31,7 +31,6 @@ namespace TugasBesar_KPL_2425_Kelompok_4.Penarikan_Keuntungan
             TRANSFER     // Admin transfer
         }
 
-        // Transition model between states
         public class Transition
         {
             public PenarikanState prevState;
@@ -46,7 +45,6 @@ namespace TugasBesar_KPL_2425_Kelompok_4.Penarikan_Keuntungan
             }
         }
 
-        // State transitions
         public static Transition[] transitions =
         {
             new Transition(PenarikanState.MEMASUKKAN_DATA, PenarikanState.VALIDASI, PenarikanTrigger.SUBMIT),
@@ -59,7 +57,6 @@ namespace TugasBesar_KPL_2425_Kelompok_4.Penarikan_Keuntungan
             new Transition(PenarikanState.DITERIMA, PenarikanState.BERHASIL, PenarikanTrigger.TRANSFER)
         };
 
-        // Function to get the next state
         public static PenarikanState GetNextState(PenarikanState prevState, PenarikanTrigger trigger)
         {
             foreach (var t in transitions)
