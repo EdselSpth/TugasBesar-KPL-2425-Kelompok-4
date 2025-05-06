@@ -1,4 +1,6 @@
-﻿namespace TugasBesar_KPL_2425_Kelompok_4
+﻿using TugasBesar_KPL_2425_Kelompok_4.GarbageCollectionSchedule;
+
+namespace TugasBesar_KPL_2425_Kelompok_4
 {
         class Program
     {
@@ -13,6 +15,16 @@
             Console.WriteLine("Abdul Azis Saepurohmat - 103022300092");
             Console.WriteLine("Tio Funny Tinambunan - 103022330036");
             Console.WriteLine("=====================================\n");
+
+            Console.Write("Masukkan nama area: ");
+            string inputArea = Console.ReadLine();
+
+            // Buat objek area baru dan isi datanya
+            configPendaftaraanArea areaBaru = new configPendaftaraanArea();
+            areaBaru.area = inputArea;
+
+            // Simpan data ke file
+            areaBaru.saveArea();
         }
     }
 }
