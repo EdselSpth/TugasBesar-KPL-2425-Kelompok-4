@@ -10,4 +10,8 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TugasBesar-KPL-2425-Kelompok-4\TugasBesar-KPL-2425-Kelompok-4.csproj" />
+  </ItemGroup>
+
 </Project>

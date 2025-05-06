@@ -1,6 +1,7 @@
 ﻿using JadwalAPI.Model;
 using JadwalAPI.Configuration;
 using Microsoft.Extensions.Options;
+using TugasBesar_KPL_2425_Kelompok_4.Model;
 
 namespace JadwalAPI.Services
 {
@@ -14,15 +15,15 @@ namespace JadwalAPI.Services
             _settings = settings.Value;
 
             _jadwalList = new List<JadwalModel>
-    {
-        new JadwalModel { Tanggal = DateOnly.FromDateTime(DateTime.Now), JenisSampah = new List<string> { "Organik" }, namaKurir = "Andi", areaDiambil = _settings.DefaultArea, Hari = DateTime.Now.ToString("dddd") },
-        new JadwalModel { Tanggal = DateOnly.FromDateTime(DateTime.Now.AddDays(1)), JenisSampah = new List<string> { "Plastik" }, namaKurir = "Budi", areaDiambil = _settings.DefaultArea, Hari = DateTime.Now.AddDays(1).ToString("dddd") },
-        new JadwalModel { Tanggal = DateOnly.FromDateTime(DateTime.Now.AddDays(2)), JenisSampah = new List<string> { "Kertas" }, namaKurir = "Joko", areaDiambil = _settings.DefaultArea, Hari = DateTime.Now.AddDays(2).ToString("dddd") },
-        new JadwalModel { Tanggal = DateOnly.FromDateTime(DateTime.Now.AddDays(3)), JenisSampah = new List<string> { "Logam" }, namaKurir = "Oka", areaDiambil = _settings.DefaultArea, Hari = DateTime.Now.AddDays(3).ToString("dddd") },
-        new JadwalModel { Tanggal = DateOnly.FromDateTime(DateTime.Now.AddDays(4)), JenisSampah = new List<string> { "Elektronik" }, namaKurir = "Eka", areaDiambil = _settings.DefaultArea, Hari = DateTime.Now.AddDays(4).ToString("dddd") },
-        new JadwalModel { Tanggal = DateOnly.FromDateTime(DateTime.Now.AddDays(5)), JenisSampah = new List<string> { "BahanBerbahaya" }, namaKurir = "Herawan", areaDiambil = _settings.DefaultArea, Hari = DateTime.Now.AddDays(5).ToString("dddd") },
-        new JadwalModel { Tanggal = DateOnly.FromDateTime(DateTime.Now.AddDays(6)), JenisSampah = new List<string> { "Minyak" }, namaKurir = "Tono", areaDiambil = _settings.DefaultArea, Hari = DateTime.Now.AddDays(6).ToString("dddd") }
-    };
+            {
+                new JadwalModel { Tanggal = DateOnly.FromDateTime(DateTime.Now), JenisSampah = new List<string> { JenisSampah.Organik.ToString() }, namaKurir = "Andi", areaDiambil = _settings.DefaultArea },
+                new JadwalModel { Tanggal = DateOnly.FromDateTime(DateTime.Now.AddDays(1)), JenisSampah = new List<string> { JenisSampah.Plastik.ToString() }, namaKurir = "Budi", areaDiambil = _settings.DefaultArea },
+                new JadwalModel { Tanggal = DateOnly.FromDateTime(DateTime.Now.AddDays(2)), JenisSampah = new List<string> { JenisSampah.Kertas.ToString() }, namaKurir = "Joko", areaDiambil = _settings.DefaultArea },
+                new JadwalModel { Tanggal = DateOnly.FromDateTime(DateTime.Now.AddDays(3)), JenisSampah = new List<string> { JenisSampah.Logam.ToString() }, namaKurir = "Oka", areaDiambil = _settings.DefaultArea },
+                new JadwalModel { Tanggal = DateOnly.FromDateTime(DateTime.Now.AddDays(4)), JenisSampah = new List<string> { JenisSampah.Elektronik.ToString() }, namaKurir = "Eka", areaDiambil = _settings.DefaultArea },
+                new JadwalModel { Tanggal = DateOnly.FromDateTime(DateTime.Now.AddDays(5)), JenisSampah = new List<string> { JenisSampah.BahanBerbahaya.ToString() }, namaKurir = "Herawan", areaDiambil = _settings.DefaultArea },
+                new JadwalModel { Tanggal = DateOnly.FromDateTime(DateTime.Now.AddDays(6)), JenisSampah = new List<string> { JenisSampah.Minyak.ToString() }, namaKurir = "Tono", areaDiambil = _settings.DefaultArea }
+            };
         }
 
         public List<JadwalModel> GetAll() => _jadwalList;
@@ -34,6 +35,12 @@ namespace JadwalAPI.Services
         {
             if (string.IsNullOrWhiteSpace(jadwal.areaDiambil))
                 jadwal.areaDiambil = _settings.DefaultArea;
+
+            // Ensure JenisSampah is being passed as a List<string> for consistency
+            if (jadwal.JenisSampah != null && jadwal.JenisSampah.Count == 0)
+            {
+                jadwal.JenisSampah = new List<string> { JenisSampah.Organik.ToString() }; // Default if empty
+            }
 
             _jadwalList.Add(jadwal);
         }
