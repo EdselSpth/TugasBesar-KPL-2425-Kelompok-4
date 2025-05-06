@@ -8,6 +8,23 @@ using TugasBesar_KPL_2425_Kelompok_4.Model;
 
 namespace TugasBesar_KPL_2425_Kelompok_4.GarbageCollectionSchedule
 {
+    public enum JenisSampah
+    {
+        Organik,
+        Plastik,
+        Kertas,
+        Logam,
+        Elektronik,
+        BahanBerbahaya,
+        Minyak,
+    }
+
+    public enum JenisPengguna
+    {
+        Admin,
+        Kurir,
+        Pengguna,
+    }
     static class rulesJadwal
     {
         public static readonly Dictionary<JenisSampah, DayOfWeek[]> HariPengambilan = new()
