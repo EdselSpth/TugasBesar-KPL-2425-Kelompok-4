@@ -27,7 +27,7 @@ namespace TugasBesar_KPL_2425_Kelompok_4.GarbageCollectionSchedule
             {
                 string content = File.ReadAllText(configPath);
 
-                // Validasi isi file, hanya deserialisasi jika isi valid
+
                 if (!string.IsNullOrWhiteSpace(content))
                 {
                     try
@@ -37,8 +37,8 @@ namespace TugasBesar_KPL_2425_Kelompok_4.GarbageCollectionSchedule
                     }
                     catch (JsonException ex)
                     {
-                        Console.WriteLine("⚠️ Gagal membaca file JSON: " + ex.Message);
-                        // Bisa reset atau abaikan data lama
+                        Console.WriteLine("Gagal membaca file JSON: " + ex.Message);
+
                     }
                 }
             }

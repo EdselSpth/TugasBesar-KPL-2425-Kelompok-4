@@ -19,11 +19,11 @@ namespace TugasBesar_KPL_2425_Kelompok_4
             Console.Write("Masukkan nama area: ");
             string inputArea = Console.ReadLine();
 
-            // Buat objek area baru dan isi datanya
+
             configPendaftaraanArea areaBaru = new configPendaftaraanArea();
             areaBaru.area = inputArea;
 
-            // Simpan data ke file
+
             areaBaru.saveArea();
 
             Console.Write("Masukkan nama pengguna: ");
@@ -39,7 +39,7 @@ namespace TugasBesar_KPL_2425_Kelompok_4
             Console.Write("Masukkan keterangan tambahan (opsional): ");
             string keterangan = Console.ReadLine();
 
-            // Buat objek pendaftaran penjemputan
+
             configPendaftaranPenjemputan<string> pendaftaran = new configPendaftaranPenjemputan<string>
             {
                 namaPengguna = namaPengguna,
@@ -48,7 +48,7 @@ namespace TugasBesar_KPL_2425_Kelompok_4
                 KeteranganTambahan = keterangan
             };
 
-            // Simpan ke file
+
             pendaftaran.Simpan();
             Console.WriteLine("\nTekan Enter untuk keluar...");
             Console.ReadLine();
