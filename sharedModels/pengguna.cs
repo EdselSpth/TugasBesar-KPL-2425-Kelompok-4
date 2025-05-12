@@ -6,15 +6,16 @@ using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using TugasBesar_KPL_2425_Kelompok_4.Model;
+using sharedModels;
 
 namespace TugasBesar_KPL_2425_Kelompok_4.Model
 {
-    class pengguna
+    public class Pengguna
     {
         public string nama { get; set; }
         public JenisPengguna peran { get; set; }
 
-        public pengguna(string namaInput, JenisPengguna peranInput)
+        public Pengguna(string namaInput, JenisPengguna peranInput)
         {
             Debug.Assert(namaInput != null, "Nama tidak boleh null");
             if(namaInput == null)
@@ -25,7 +26,7 @@ namespace TugasBesar_KPL_2425_Kelompok_4.Model
             peran = peranInput;
         }
 
-        public pengguna()
+        public Pengguna()
         {
                
         }

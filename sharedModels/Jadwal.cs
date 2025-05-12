@@ -4,11 +4,11 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using sharedModels;
 
 namespace TugasBesar_KPL_2425_Kelompok_4.Model
 {
-    class Jadwal 
+    class Jadwal <T>
     {
         public DateOnly Tanggal { get; set; }
         public List<JenisSampah> jenisSampahList { get; set; }

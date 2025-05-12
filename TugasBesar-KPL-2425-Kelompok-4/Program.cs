@@ -1,9 +1,7 @@
-﻿using TugasBesar_KPL_2425_Kelompok_4.Penarikan_Keuntungan;
-
-namespace TugasBesar_KPL_2425_Kelompok_4
+﻿namespace TugasBesar_KPL_2425_Kelompok_4
 {
         class Program
-    {
+        {
         static void Main(string[] args)
         {
             Console.WriteLine("ReGreen");
@@ -16,8 +14,7 @@ namespace TugasBesar_KPL_2425_Kelompok_4
             Console.WriteLine("Tio Funny Tinambunan - 103022330036");
             Console.WriteLine("=====================================\n");
 
-            PenarikanCustomer.StateBasedPenarikanCustomer();
-            PenarikanAdmin.StateBasedPenarikanAdmin();
+            Admin.adminProgram();
         }
     }
 }
