@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TugasBesar_KPL_2425_Kelompok_4.Model;
+using modelLibrary;
 
 namespace TugasBesar_KPL_2425_Kelompok_4.GarbageCollectionSchedule
 {
@@ -18,7 +16,7 @@ namespace TugasBesar_KPL_2425_Kelompok_4.GarbageCollectionSchedule
             { JenisSampah.Logam, new[] { DayOfWeek.Thursday, DayOfWeek.Saturday } },
             { JenisSampah.Elektronik, new[] { DayOfWeek.Friday, DayOfWeek.Sunday } },
             { JenisSampah.BahanBerbahaya, new[] { DayOfWeek.Saturday, DayOfWeek.Monday } },
-            { JenisSampah.Minyak, new[] { DayOfWeek.Sunday, DayOfWeek.Tuesday } } 
+            { JenisSampah.Minyak, new[] { DayOfWeek.Sunday, DayOfWeek.Tuesday } }
         };
 
         public static bool pengambilanValidasi(JenisSampah jenis, DateTime tanggal)
