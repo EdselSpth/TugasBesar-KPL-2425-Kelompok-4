@@ -1,8 +1,4 @@
-﻿using modelLibrary;
-using TugasBesar_KPL_2425_Kelompok_4.GarbageCollectionSchedule;
-using TugasBesar_KPL_2425_Kelompok_4.UserProgram;
-
-namespace TugasBesar_KPL_2425_Kelompok_4
+﻿namespace TugasBesar_KPL_2425_Kelompok_4
 {
         class Program
         {
