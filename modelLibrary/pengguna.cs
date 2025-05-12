@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace modelLibrary
 {
-    class pengguna
+    public class pengguna
     {
         public string nama { get; set; }
         public JenisPengguna peran { get; set; }
