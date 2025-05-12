@@ -1,49 +1,51 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static TugasBesar_KPL_2425_Kelompok_4.Penarikan_Keuntungan.StateBasedPenarikan;
 
 namespace TugasBesar_KPL_2425_Kelompok_4.Penarikan_Keuntungan
 {
-    class PenarikanAdmin
+    public class PenarikanAdmin
     {
-        private static PenarikanState currentState = PenarikanState.MENUNGGU_APPROVAL;
-
-        public static void StateBasedPenarikanAdmin()
+        public static readonly Dictionary<Pembayaran, PembayaranInfo> PembayaranTable = new()
         {
-            Console.WriteLine("=== Fitur Penarikan Keuntungan (Admin) ===");
+            { Pembayaran.Tunai, new PembayaranInfo("Pembayaran menggunakan uang tunai", 0, 50000) },
+            { Pembayaran.Bca, new PembayaranInfo("Transfer melalui BCA", 5000, 50000) },
+            { Pembayaran.Bni, new PembayaranInfo("Transfer melalui BNI", 5000, 50000) },
+            { Pembayaran.Mandiri, new PembayaranInfo("Transfer melalui Mandiri", 5000, 50000) },
+            { Pembayaran.Bri, new PembayaranInfo("Transfer melalui BRI", 5000, 50000) },
+            { Pembayaran.ShopeePay, new PembayaranInfo("Pembayaran melalui ShopeePay", 1000, 50000) },
+            { Pembayaran.Gopay, new PembayaranInfo("Pembayaran melalui Gopay", 1000, 50000) },
+            { Pembayaran.Dana, new PembayaranInfo("Pembayaran melalui Dana", 1000, 50000) },
+        };
 
-            while (true)
+        public static void ProsesPenarikan(ref PenarikanState currentState, Pembayaran selectedMethod, decimal nominal)
+        {
+            PembayaranInfo info = PembayaranTable[selectedMethod];
+            decimal totalDiterima = nominal - info.BiayaAdmin;
+
+            Console.WriteLine("\n=== Fitur Penarikan Keuntungan (Admin) ===");
+            Console.WriteLine($"Metode Pembayaran    : {info.Deskripsi}");
+            Console.WriteLine($"Biaya Admin          : {info.BiayaAdmin}");
+            Console.WriteLine($"Minimal Penarikan    : {info.MinimalPenarikan}");
+            Console.WriteLine($"Jumlah Diajukan      : {nominal}");
+            Console.WriteLine($"Jumlah Diterima      : {totalDiterima}");
+
+            Console.WriteLine("\nPermintaan penarikan menunggu approval...");
+            Console.WriteLine("1. Setujui");
+            Console.WriteLine("2. Tolak");
+
+            string approval = Console.ReadLine();
+
+            if (approval == "1")
             {
-                switch (currentState)
-                {
-                    case PenarikanState.MENUNGGU_APPROVAL:
-                        Console.WriteLine("\nPermintaan penarikan menunggu approval...");
-                        Console.WriteLine("1. Setujui");
-                        Console.WriteLine("2. Tolak");
-                        string approval = Console.ReadLine();
-
-                        if (approval == "1")
-                        {
-                            currentState = StateBasedPenarikan.GetNextState(currentState, PenarikanTrigger.APPROVE);
-                        }
-                        else if (approval == "2")
-                        {
-                            currentState = StateBasedPenarikan.GetNextState(currentState, PenarikanTrigger.REJECT);
-                        }
-                        break;
-
-                    case PenarikanState.DITERIMA:
-                        Console.WriteLine("Permintaan penarikan disetujui! Transaksi berhasil.");
-                        currentState = StateBasedPenarikan.GetNextState(currentState, PenarikanTrigger.TRANSFER);
-                        return;
-
-                    case PenarikanState.DITOLAK:
-                        Console.WriteLine("Permintaan penarikan ditolak.");
-                        return;
-                }
+                Console.WriteLine("Permintaan penarikan disetujui.");
+                currentState = StateBasedPenarikan.GetNextState(currentState, PenarikanTrigger.APPROVE);
+                currentState = StateBasedPenarikan.GetNextState(currentState, PenarikanTrigger.TRANSFER);
+            }
+            else
+            {
+                Console.WriteLine("Permintaan penarikan ditolak.");
+                currentState = StateBasedPenarikan.GetNextState(currentState, PenarikanTrigger.REJECT);
             }
         }
     }

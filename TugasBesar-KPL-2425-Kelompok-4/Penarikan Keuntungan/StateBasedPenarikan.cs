@@ -1,34 +1,56 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TugasBesar_KPL_2425_Kelompok_4.Penarikan_Keuntungan
 {
+    public enum Pembayaran
+    {
+        Tunai = 1,
+        Bca,
+        Bni,
+        Mandiri,
+        Bri,
+        ShopeePay,
+        Gopay,
+        Dana
+    }
+
+    public class PembayaranInfo
+    {
+        public string Deskripsi { get; set; }
+        public decimal BiayaAdmin { get; set; }
+        public decimal MinimalPenarikan { get; set; }
+
+        public PembayaranInfo(string deskripsi, decimal biayaAdmin, decimal minimalPenarikan)
+        {
+            Deskripsi = deskripsi;
+            BiayaAdmin = biayaAdmin;
+            MinimalPenarikan = minimalPenarikan;
+        }
+    }
+
     public class StateBasedPenarikan
     {
-        // Define states for Penarikan
         public enum PenarikanState
         {
-            MEMASUKKAN_DATA,    // Customer memasukkan data
-            VALIDASI,           // Validasi data
-            BERHASIL,           // Penarikan berhasil
-            GAGAL,              // Penarikan gagal
-            MENUNGGU_APPROVAL,  // Admin menyetujui
-            DITERIMA,           // Admin menyetujui dan transfer
-            DITOLAK             // Admin menolak
+            MEMASUKKAN_DATA,
+            VALIDASI,
+            BERHASIL,
+            GAGAL,
+            MENUNGGU_APPROVAL,
+            DITERIMA,
+            DITOLAK
         }
 
         public enum PenarikanTrigger
         {
-            SUBMIT,      // Customer submit data
-            VALID,       // Data valid
-            INVALID,     // Data tidak valid
-            RETRY,       // Retry untuk Customer
-            APPROVE,     // Admin approve
-            REJECT,      // Admin reject
-            TRANSFER     // Admin transfer
+            SUBMIT,
+            VALID,
+            INVALID,
+            RETRY,
+            APPROVE,
+            REJECT,
+            TRANSFER
         }
 
         public class Transition
@@ -45,26 +67,56 @@ namespace TugasBesar_KPL_2425_Kelompok_4.Penarikan_Keuntungan
             }
         }
 
-        public static Transition[] transitions =
+        public static readonly Dictionary<PenarikanState, Dictionary<PenarikanTrigger, PenarikanState>> stateTransitionTable = new Dictionary<PenarikanState, Dictionary<PenarikanTrigger, PenarikanState>>
         {
-            new Transition(PenarikanState.MEMASUKKAN_DATA, PenarikanState.VALIDASI, PenarikanTrigger.SUBMIT),
-            new Transition(PenarikanState.VALIDASI, PenarikanState.BERHASIL, PenarikanTrigger.VALID),
-            new Transition(PenarikanState.VALIDASI, PenarikanState.GAGAL, PenarikanTrigger.INVALID),
-            new Transition(PenarikanState.GAGAL, PenarikanState.MEMASUKKAN_DATA, PenarikanTrigger.RETRY),
-            new Transition(PenarikanState.MEMASUKKAN_DATA, PenarikanState.MENUNGGU_APPROVAL, PenarikanTrigger.SUBMIT),
-            new Transition(PenarikanState.MENUNGGU_APPROVAL, PenarikanState.DITERIMA, PenarikanTrigger.APPROVE),
-            new Transition(PenarikanState.MENUNGGU_APPROVAL, PenarikanState.DITOLAK, PenarikanTrigger.REJECT),
-            new Transition(PenarikanState.DITERIMA, PenarikanState.BERHASIL, PenarikanTrigger.TRANSFER)
+            {
+                PenarikanState.MEMASUKKAN_DATA, new Dictionary<PenarikanTrigger, PenarikanState>
+                {
+                    { PenarikanTrigger.SUBMIT, PenarikanState.MENUNGGU_APPROVAL },
+                    { PenarikanTrigger.INVALID, PenarikanState.GAGAL }
+                }
+            },
+            {
+                PenarikanState.VALIDASI, new Dictionary<PenarikanTrigger, PenarikanState>
+                {
+                    { PenarikanTrigger.VALID, PenarikanState.BERHASIL },
+                    { PenarikanTrigger.INVALID, PenarikanState.GAGAL }
+                }
+            },
+            {
+                PenarikanState.GAGAL, new Dictionary<PenarikanTrigger, PenarikanState>
+                {
+                    { PenarikanTrigger.RETRY, PenarikanState.MEMASUKKAN_DATA }
+                }
+            },
+            {
+                PenarikanState.MENUNGGU_APPROVAL, new Dictionary<PenarikanTrigger, PenarikanState>
+                {
+                    { PenarikanTrigger.APPROVE, PenarikanState.DITERIMA },
+                    { PenarikanTrigger.REJECT, PenarikanState.DITOLAK }
+                }
+            },
+            {
+                PenarikanState.DITERIMA, new Dictionary<PenarikanTrigger, PenarikanState>
+                {
+                    { PenarikanTrigger.TRANSFER, PenarikanState.BERHASIL }
+                }
+            },
+            {
+                PenarikanState.DITOLAK, new Dictionary<PenarikanTrigger, PenarikanState>
+                {
+                    { PenarikanTrigger.RETRY, PenarikanState.MEMASUKKAN_DATA }
+                }
+            }
         };
 
         public static PenarikanState GetNextState(PenarikanState prevState, PenarikanTrigger trigger)
         {
-            foreach (var t in transitions)
+            if (stateTransitionTable.ContainsKey(prevState) && stateTransitionTable[prevState].ContainsKey(trigger))
             {
-                if (t.prevState == prevState && t.trigger == trigger)
-                    return t.nextState;
+                return stateTransitionTable[prevState][trigger];
             }
-            return prevState;
+            return prevState; 
         }
     }
 }
