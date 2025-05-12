@@ -15,9 +15,6 @@ namespace TugasBesar_KPL_2425_Kelompok_4.GarbageCollectionSchedule
     {
         private static readonly HttpClient _http = new HttpClient { BaseAddress = new Uri("https://localhost:7277/") };
 
-        /// <summary>
-        /// Versi sync: Buat dan kirim jadwal sampah untuk beberapa jenis, serta simpan ke JSON lokal.
-        /// </summary>
         public static void CreateAndSendJadwal(DateOnly tanggal, List<JenisSampah> jenisList, string namaKurir, string area)
         {
             if (jenisList == null || jenisList.Count == 0)
@@ -73,7 +70,7 @@ namespace TugasBesar_KPL_2425_Kelompok_4.GarbageCollectionSchedule
             return list?.FirstOrDefault(j => j.namaKurir.Equals(namaKurir, StringComparison.OrdinalIgnoreCase) && j.Tanggal == tanggal);
         }
 
-        public static void UpdateJadwalSync(DateOnly tanggal, List<JenisSampah> jenisList, string namaKurir, string area)
+        public static void UpdateJadwal(DateOnly tanggal, List<JenisSampah> jenisList, string namaKurir, string area)
         {
             var model = new JadwalModel
             {

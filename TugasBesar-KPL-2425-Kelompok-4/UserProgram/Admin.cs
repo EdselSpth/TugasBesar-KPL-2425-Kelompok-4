@@ -57,7 +57,7 @@ namespace TugasBesar_KPL_2425_Kelompok_4.UserProgram
                 return;
             }
 
-            // Defensive checks moved here:
+            // Pengecekan tanggal
             if (tanggal < DateOnly.FromDateTime(DateTime.Now))
             {
                 Console.WriteLine("Tanggal tidak boleh berada di masa lalu.");
@@ -173,7 +173,7 @@ namespace TugasBesar_KPL_2425_Kelompok_4.UserProgram
 
             try
             {
-                jadwalService.UpdateJadwalSync(editDate, jenisList, newKurir, area);
+                jadwalService.UpdateJadwal(editDate, jenisList, newKurir, area);
             }
             catch (Exception ex)
             {
