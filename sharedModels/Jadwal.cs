@@ -4,18 +4,18 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using sharedModels;
 
 namespace TugasBesar_KPL_2425_Kelompok_4.Model
 {
-    class Jadwal 
+    class Jadwal <T>
     {
         public DateOnly Tanggal { get; set; }
-        public List<JenisSampah> jenisSampahList { get; set; }
+        public List<T> jenisSampahList { get; set; }
         public pengguna kurirPengambil { get; set; }
         public string areaDiambil { get; set; }
 
-        public Jadwal(DateOnly tanggalInput, List<JenisSampah> jenisSampahListInput, string areaDiambilInput, pengguna kurirPengambilInput)
+        public Jadwal(DateOnly tanggalInput, List<T> jenisSampahListInput, string areaDiambilInput, pengguna kurirPengambilInput)
         {
             Debug.Assert(jenisSampahListInput != null, "Jenis Sampah yang diambil tidak boleh kosong");
             if (jenisSampahListInput == null)

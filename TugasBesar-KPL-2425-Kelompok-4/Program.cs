@@ -1,7 +1,11 @@
-﻿namespace TugasBesar_KPL_2425_Kelompok_4
+﻿using modelLibrary;
+using TugasBesar_KPL_2425_Kelompok_4.GarbageCollectionSchedule;
+using TugasBesar_KPL_2425_Kelompok_4.UserProgram;
+
+namespace TugasBesar_KPL_2425_Kelompok_4
 {
         class Program
-    {
+        {
         static void Main(string[] args)
         {
             Console.WriteLine("ReGreen");
@@ -13,6 +17,8 @@
             Console.WriteLine("Abdul Azis Saepurohmat - 103022300092");
             Console.WriteLine("Tio Funny Tinambunan - 103022330036");
             Console.WriteLine("=====================================\n");
+
+            Admin.adminProgram();
         }
     }
 }

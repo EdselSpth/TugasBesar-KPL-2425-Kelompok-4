@@ -1,5 +1,5 @@
 ﻿using JadwalAPI.Model;
-using TugasBesar_KPL_2425_Kelompok_4.Model;
+using modelLibrary;
 
 namespace JadwalAPI.Services
 {
