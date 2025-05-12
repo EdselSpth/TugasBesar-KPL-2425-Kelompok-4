@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace TugasBesar_KPL_2425_Kelompok_4.GarbageCollectionSchedule
 {
     
-    class configPendaftaraanArea
+    public class configPendaftaraanArea
     {
         string configPath = "daftarArea.json";
         public int id { get; set; }
@@ -31,25 +31,34 @@ namespace TugasBesar_KPL_2425_Kelompok_4.GarbageCollectionSchedule
                 }
             }
         }
-        public void saveArea() 
+        public void saveArea()
         {
-            LoadConvig();
-
-            int maxId = 0;
-            foreach (var i in listArea)
+            try
             {
-                if (i.id > maxId)
-                {
-                    maxId = i.id;
-                }
-            }
-            this.id = maxId + 1;
-            listArea.Add(this);
+                LoadConvig();
 
-            string newFile = JsonSerializer.Serialize(listArea, new JsonSerializerOptions { WriteIndented = true });
-            File.WriteAllText("daftarArea.json", newFile);
+                int maxId = 0;
+                foreach (var i in listArea)
+                {
+                    if (i.id > maxId)
+                    {
+                        maxId = i.id;
+                    }
+                }
+                this.id = maxId + 1;
+                listArea.Add(this);
+
+                string newData = JsonSerializer.Serialize(listArea, new JsonSerializerOptions { WriteIndented = true });
+                File.WriteAllText(configPath, newData);
+                Console.WriteLine("Data area berhasil disimpan.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Terjadi kesalahan saat menyimpan data area.");
+                Console.WriteLine($"Detail: {ex.Message}");
+            }
         }
-        
+
     };
 
             

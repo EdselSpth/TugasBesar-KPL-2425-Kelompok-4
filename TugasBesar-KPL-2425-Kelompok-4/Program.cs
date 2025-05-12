@@ -25,6 +25,33 @@ namespace TugasBesar_KPL_2425_Kelompok_4
 
             // Simpan data ke file
             areaBaru.saveArea();
+
+            Console.Write("Masukkan nama pengguna: ");
+            string namaPengguna = Console.ReadLine();
+
+            Console.Write("Masukkan jadwal penjemputan (yyyy-MM-dd HH:mm): ");
+            DateTime jadwal;
+            while (!DateTime.TryParse(Console.ReadLine(), out jadwal))
+            {
+                Console.Write("Format salah. Masukkan lagi (yyyy-MM-dd HH:mm): ");
+            }
+
+            Console.Write("Masukkan keterangan tambahan (opsional): ");
+            string keterangan = Console.ReadLine();
+
+            // Buat objek pendaftaran penjemputan
+            configPendaftaranPenjemputan<string> pendaftaran = new configPendaftaranPenjemputan<string>
+            {
+                namaPengguna = namaPengguna,
+                Area = areaBaru,
+                Jadwal = jadwal,
+                KeteranganTambahan = keterangan
+            };
+
+            // Simpan ke file
+            pendaftaran.Simpan();
+            Console.WriteLine("\nTekan Enter untuk keluar...");
+            Console.ReadLine();
         }
     }
 }
