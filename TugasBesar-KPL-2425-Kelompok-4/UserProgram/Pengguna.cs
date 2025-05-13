@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TugasBesar_KPL_2425_Kelompok_4.GarbageCollectionSchedule;
+using TugasBesar_KPL_2425_Kelompok_4.Penarikan_Keuntungan;
+using static TugasBesar_KPL_2425_Kelompok_4.Penarikan_Keuntungan.StateBasedPenarikan;
 
 namespace TugasBesar_KPL_2425_Kelompok_4.UserProgram
 {
@@ -26,6 +28,7 @@ namespace TugasBesar_KPL_2425_Kelompok_4.UserProgram
                             jadwalService.ViewJadwal();
                             break;
                         case 2:
+                            PenarikanCustomer.StateBasedPenarikanCustomer();
                             break;
                         case 3:
                             break;
