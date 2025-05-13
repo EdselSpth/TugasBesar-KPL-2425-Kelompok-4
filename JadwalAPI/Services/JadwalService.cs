@@ -16,13 +16,13 @@ namespace JadwalAPI.Services
 
             _jadwalList = new List<JadwalModel>
             {
-                new JadwalModel { Tanggal = DateOnly.FromDateTime(DateTime.Now), JenisSampah = new List<string> { JenisSampah.Organik.ToString() }, namaKurir = "Andi", areaDiambil = _settings.DefaultArea },
-                new JadwalModel { Tanggal = DateOnly.FromDateTime(DateTime.Now.AddDays(1)), JenisSampah = new List<string> { JenisSampah.Plastik.ToString() }, namaKurir = "Budi", areaDiambil = _settings.DefaultArea },
-                new JadwalModel { Tanggal = DateOnly.FromDateTime(DateTime.Now.AddDays(2)), JenisSampah = new List<string> { JenisSampah.Kertas.ToString() }, namaKurir = "Joko", areaDiambil = _settings.DefaultArea },
-                new JadwalModel { Tanggal = DateOnly.FromDateTime(DateTime.Now.AddDays(3)), JenisSampah = new List<string> { JenisSampah.Logam.ToString() }, namaKurir = "Oka", areaDiambil = _settings.DefaultArea },
-                new JadwalModel { Tanggal = DateOnly.FromDateTime(DateTime.Now.AddDays(4)), JenisSampah = new List<string> { JenisSampah.Elektronik.ToString() }, namaKurir = "Eka", areaDiambil = _settings.DefaultArea },
-                new JadwalModel { Tanggal = DateOnly.FromDateTime(DateTime.Now.AddDays(5)), JenisSampah = new List<string> { JenisSampah.BahanBerbahaya.ToString() }, namaKurir = "Herawan", areaDiambil = _settings.DefaultArea },
-                new JadwalModel { Tanggal = DateOnly.FromDateTime(DateTime.Now.AddDays(6)), JenisSampah = new List<string> { JenisSampah.Minyak.ToString() }, namaKurir = "Tono", areaDiambil = _settings.DefaultArea }
+                new JadwalModel { Tanggal = DateOnly.FromDateTime(DateTime.Now), JenisSampah = new List<string> { JenisSampah.Organik.ToString() }, namaKurir = "Andi", areaDiambil = "Buahbatu" },
+                new JadwalModel { Tanggal = DateOnly.FromDateTime(DateTime.Now.AddDays(1)), JenisSampah = new List<string> { JenisSampah.Plastik.ToString() }, namaKurir = "Budi", areaDiambil = "Bojongsoang" },
+                new JadwalModel { Tanggal = DateOnly.FromDateTime(DateTime.Now.AddDays(2)), JenisSampah = new List<string> { JenisSampah.Kertas.ToString() }, namaKurir = "Joko", areaDiambil = "Cimahi" },
+                new JadwalModel { Tanggal = DateOnly.FromDateTime(DateTime.Now.AddDays(3)), JenisSampah = new List<string> { JenisSampah.Logam.ToString() }, namaKurir = "Oka", areaDiambil = "Pasirkoja" },
+                new JadwalModel { Tanggal = DateOnly.FromDateTime(DateTime.Now.AddDays(4)), JenisSampah = new List<string> { JenisSampah.Elektronik.ToString() }, namaKurir = "Eka", areaDiambil = "Gedebage" },
+                new JadwalModel { Tanggal = DateOnly.FromDateTime(DateTime.Now.AddDays(5)), JenisSampah = new List<string> { JenisSampah.BahanBerbahaya.ToString() }, namaKurir = "Herawan", areaDiambil = "Kiaracondong" },
+                new JadwalModel { Tanggal = DateOnly.FromDateTime(DateTime.Now.AddDays(6)), JenisSampah = new List<string> { JenisSampah.Minyak.ToString() }, namaKurir = "Tono", areaDiambil = "Ciganitri" }
             };
         }
 
