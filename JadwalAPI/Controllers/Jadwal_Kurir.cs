@@ -22,7 +22,9 @@ namespace JadwalAPI.Controllers
         }
 
         [HttpGet("{tanggal}")]
-        public ActionResult<JadwalModel> GetByTanggal(string tanggal)
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public ActionResult<List<JadwalModel>> GetByTanggal(string tanggal)
         {
             if (!DateOnly.TryParse(tanggal, out DateOnly parsedDate))
                 return BadRequest("Format tanggal tidak valid. Gunakan format yyyy-MM-dd.");
