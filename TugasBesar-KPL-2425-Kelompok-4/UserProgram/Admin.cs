@@ -20,7 +20,7 @@ namespace TugasBesar_KPL_2425_Kelompok_4.UserProgram
             {
                 string login = "Edsel";
                 int menuInput = 9999;
-                while (menuInput != 5)
+                while (menuInput != 6)
                 {
                     Menu.menuAdmin(login);
                     menuInput = Convert.ToInt32(Console.ReadLine());
@@ -41,7 +41,6 @@ namespace TugasBesar_KPL_2425_Kelompok_4.UserProgram
                         case 5:
                             PenarikanState currentState = PenarikanState.MEMASUKKAN_DATA;
                             PenarikanAdmin.ProsesPenarikan(ref currentState, Pembayaran.Bca, 100000);
-                            adminProgram();
                             break;
                         case 6:
                             Console.WriteLine("Terima kasih sudah menggunakan aplikasi");
