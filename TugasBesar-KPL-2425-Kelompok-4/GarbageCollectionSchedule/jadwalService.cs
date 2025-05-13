@@ -10,6 +10,8 @@ using System.Net.Http.Json;
 using System.Text.Json;
 using Microsoft.Extensions.Options;
 using System.Reflection;
+using System.Globalization;
+using System.Text.Json.Serialization;
 
 namespace TugasBesar_KPL_2425_Kelompok_4.GarbageCollectionSchedule
 {
@@ -48,13 +50,11 @@ namespace TugasBesar_KPL_2425_Kelompok_4.GarbageCollectionSchedule
                 var existingJson = File.ReadAllText(fileName).Trim();
                 if (existingJson.StartsWith("["))
                 {
-                    // Sudah array
                     semuaJadwal = JsonSerializer.Deserialize<List<JadwalModel>>(existingJson, options)
                                   ?? new List<JadwalModel>();
                 }
                 else if (existingJson.StartsWith("{"))
                 {
-                    // Objek tunggal → bungkus jadi list
                     var single = JsonSerializer.Deserialize<JadwalModel>(existingJson, options);
                     semuaJadwal = single != null
                         ? new List<JadwalModel> { single }
@@ -135,28 +135,71 @@ namespace TugasBesar_KPL_2425_Kelompok_4.GarbageCollectionSchedule
 
         public static void DeleteJadwalByKurirDanTanggal(string namaKurir, DateOnly tanggal)
         {
-            var jadwal = GetJadwalByKurirDanTanggal(namaKurir, tanggal);
-            if (jadwal == null)
+            // 1. Panggil API
+            var apiResponse = _http.DeleteAsync($"api/jadwal_admin/{tanggal:yyyy-MM-dd}").Result;
+            if (!apiResponse.IsSuccessStatusCode)
             {
-                Console.WriteLine("Jadwal tidak ditemukan.");
+                Console.WriteLine("Gagal menghapus jadwal dari API.");
+                return;
+            }
+            Console.WriteLine("Jadwal berhasil dihapus dari API.");
+
+            // 2. Hapus entri di file lokal
+            var fileName = $"jadwal_{tanggal:yyyyMMdd}.json";
+            if (!File.Exists(fileName))
+            {
+                Console.WriteLine($"File {fileName} tidak ditemukan, tidak ada yang perlu dihapus.");
                 return;
             }
 
-            var response = _http.DeleteAsync($"api/jadwal_admin/{tanggal:yyyy-MM-dd}").Result;
-            if (response.IsSuccessStatusCode)
+            // Siapkan serializer dengan converter DateOnly
+            var options = new JsonSerializerOptions
             {
-                Console.WriteLine("Jadwal berhasil dihapus dari API.");
-                var fileName = $"jadwal_{tanggal:yyyyMMdd}.json";
-                if (File.Exists(fileName))
-                {
-                    File.Delete(fileName);
-                    Console.WriteLine($"File lokal {fileName} juga dihapus.");
-                }
+                PropertyNameCaseInsensitive = true,
+                Converters = { new DateOnlyJsonConverter() }
+            };
+
+            // Baca dan deserialize seluruh array
+            var json = File.ReadAllText(fileName);
+            var list = JsonSerializer.Deserialize<List<JadwalModel>>(json, options)
+                            ?? new List<JadwalModel>();
+
+            // Cari entri matching dan hapus
+            var removed = list.RemoveAll(j =>
+                j.namaKurir.Equals(namaKurir, StringComparison.OrdinalIgnoreCase)
+                && j.Tanggal == tanggal);
+
+            if (removed == 0)
+            {
+                Console.WriteLine("Tidak ada entri jadwal di file yang cocok untuk dihapus.");
+                return;
+            }
+
+            // Jika setelah hapus list kosong → delete file; kalau masih ada → tulis ulang
+            if (list.Count == 0)
+            {
+                File.Delete(fileName);
+                Console.WriteLine($"Semua entri di file {fileName} dihapus; file dihapus.");
             }
             else
             {
-                Console.WriteLine("Gagal menghapus jadwal dari API.");
+                var updatedJson = JsonSerializer.Serialize(list, options);
+                File.WriteAllText(fileName, updatedJson);
+                Console.WriteLine($"Entitas jadwal '{namaKurir}' pada {tanggal:yyyy-MM-dd} dihapus dari {fileName}.");
             }
         }
     }
+}
+public class DateOnlyJsonConverter : JsonConverter<DateOnly>
+{
+    private const string Format = "yyyy-MM-dd";
+
+    public override DateOnly Read(ref Utf8JsonReader reader, Type type, JsonSerializerOptions options)
+    {
+        var s = reader.GetString() ?? throw new JsonException("Expected date string");
+        return DateOnly.ParseExact(s, Format, CultureInfo.InvariantCulture);
+    }
+
+    public override void Write(Utf8JsonWriter writer, DateOnly value, JsonSerializerOptions options)
+        => writer.WriteStringValue(value.ToString(Format));
 }

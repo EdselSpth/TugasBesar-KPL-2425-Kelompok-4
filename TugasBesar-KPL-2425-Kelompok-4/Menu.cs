@@ -16,7 +16,7 @@ namespace TugasBesar_KPL_2425_Kelompok_4
             Console.WriteLine("(3) Mengubah jadwal pengambilan sampah");
             Console.WriteLine("(4) Menghapus jadwal pengambilan sampah");
             Console.WriteLine("(5) Menyetujui penarikan keuntungan");
-            Console.WriteLine("(5) Keluar");
+            Console.WriteLine("(6) Keluar");
             Console.WriteLine("Pilih Menu : ");
         }
 
