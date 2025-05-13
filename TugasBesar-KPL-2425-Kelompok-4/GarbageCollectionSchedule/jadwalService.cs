@@ -8,6 +8,8 @@ using JadwalAPI;
 using JadwalAPI.Model;
 using System.Net.Http.Json;
 using System.Text.Json;
+using Microsoft.Extensions.Options;
+using System.Reflection;
 
 namespace TugasBesar_KPL_2425_Kelompok_4.GarbageCollectionSchedule
 {
@@ -33,14 +35,56 @@ namespace TugasBesar_KPL_2425_Kelompok_4.GarbageCollectionSchedule
             };
 
             var fileName = $"jadwal_{tanggal:yyyyMMdd}.json";
-            var options = new JsonSerializerOptions { WriteIndented = true };
-            File.WriteAllText(fileName, JsonSerializer.Serialize(model, options));
-            Console.WriteLine($"Tersimpan ke file {fileName}");
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true,
+                PropertyNameCaseInsensitive = true
+            };
 
+            List<JadwalModel> semuaJadwal;
+
+            if (File.Exists(fileName))
+            {
+                var existingJson = File.ReadAllText(fileName).Trim();
+                if (existingJson.StartsWith("["))
+                {
+                    // Sudah array
+                    semuaJadwal = JsonSerializer.Deserialize<List<JadwalModel>>(existingJson, options)
+                                  ?? new List<JadwalModel>();
+                }
+                else if (existingJson.StartsWith("{"))
+                {
+                    // Objek tunggal → bungkus jadi list
+                    var single = JsonSerializer.Deserialize<JadwalModel>(existingJson, options);
+                    semuaJadwal = single != null
+                        ? new List<JadwalModel> { single }
+                        : new List<JadwalModel>();
+                }
+                else
+                {
+                    // File kosong atau format aneh
+                    semuaJadwal = new List<JadwalModel>();
+                }
+            }
+            else
+            {
+                semuaJadwal = new List<JadwalModel>();
+            }
+
+            // Tambahkan model baru
+            semuaJadwal.Add(model);
+
+            // Serialisasi ulang sebagai array
+            var arrayJson = JsonSerializer.Serialize(semuaJadwal, options);
+            File.WriteAllText(fileName, arrayJson);
+            Console.WriteLine($"Tersimpan ke file {fileName} (total {semuaJadwal.Count} entri)");
+
+            // Kirim hanya object baru ke API
             var response = _http.PostAsJsonAsync("api/jadwal_admin", model).Result;
             response.EnsureSuccessStatusCode();
             Console.WriteLine("Data berhasil dikirim ke API.");
         }
+        
 
         public static void ViewJadwal()
         {
