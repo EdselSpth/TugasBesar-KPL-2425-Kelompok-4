@@ -36,6 +36,11 @@ namespace TugasBesar_KPL_2425_Kelompok_4.UserProgram
                         case 4:
                             DeleteFlow();
                             break;
+                        case 5:
+                            break;
+                        case 6:
+                            Console.WriteLine("Terima kasih sudah menggunakan aplikasi");
+                            break;
                         default:
                             Console.WriteLine("Pilihan tidak valid.");
                             break;
@@ -44,9 +49,8 @@ namespace TugasBesar_KPL_2425_Kelompok_4.UserProgram
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine($"Error {ex.Message}");
             }
-
         }
         static void createFlow()
         {
