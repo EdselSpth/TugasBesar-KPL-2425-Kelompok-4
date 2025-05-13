@@ -1,4 +1,4 @@
-﻿namespace TugasBesar_KPL_2425_Kelompok_4
+﻿namespace TugasBesar_KPL_2425_Kelompok_4cat.gitignore
 {
         class Program
         {
@@ -14,7 +14,7 @@
             Console.WriteLine("Tio Funny Tinambunan - 103022330036");
             Console.WriteLine("=====================================\n");
 
-            Admin.adminProgram();
+            
         }
     }
 }

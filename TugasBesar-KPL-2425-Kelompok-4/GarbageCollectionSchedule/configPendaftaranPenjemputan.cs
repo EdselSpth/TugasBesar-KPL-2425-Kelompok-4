@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.Json;
-using TugasBesar_KPL_2425_Kelompok_4.Model;
+using modelLibrary;
 
 namespace TugasBesar_KPL_2425_Kelompok_4.GarbageCollectionSchedule
 {

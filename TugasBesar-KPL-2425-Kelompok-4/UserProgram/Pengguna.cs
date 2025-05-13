@@ -32,6 +32,7 @@ namespace TugasBesar_KPL_2425_Kelompok_4.UserProgram
                         case 4:
                             break;
                         case 5:
+                            Console.WriteLine("Terima kasih sudah menggunakan aplikasi");
                             break;
                         default:
                             Console.WriteLine("Tidak pilihan menu itu");
