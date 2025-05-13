@@ -31,8 +31,10 @@ namespace TugasBesar_KPL_2425_Kelompok_4.UserProgram
                             PenarikanCustomer.StateBasedPenarikanCustomer();
                             break;
                         case 3:
+                            configPendaftaraanArea.DaftarkanAreaPengambilan();
                             break;
                         case 4:
+                            configPendaftaranPenjemputan<string>.DaftarkanPengambilanSampah(username);
                             break;
                         case 5:
                             Console.WriteLine("Terima kasih sudah menggunakan aplikasi");
