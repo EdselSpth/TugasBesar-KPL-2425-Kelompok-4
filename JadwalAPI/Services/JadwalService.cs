@@ -29,8 +29,7 @@ namespace JadwalAPI.Services
         public List<JadwalModel> GetAll() => _jadwalList;
 
         public List<JadwalModel> GetByTanggal(DateOnly tanggal) =>
-     _jadwalList.Where(j => j.Tanggal == tanggal).ToList();
-
+    _jadwalList.Where(j => j.Tanggal == tanggal).ToList();
 
         public void TambahJadwal(JadwalModel jadwal)
         {
