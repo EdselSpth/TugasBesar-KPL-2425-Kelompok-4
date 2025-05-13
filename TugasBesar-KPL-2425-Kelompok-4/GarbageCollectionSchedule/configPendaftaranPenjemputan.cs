@@ -62,6 +62,65 @@ namespace TugasBesar_KPL_2425_Kelompok_4.GarbageCollectionSchedule
             Console.WriteLine("Pendaftaran berhasil disimpan.");
 
         }
+        public static void DaftarkanPengambilanSampah(string username)
+        {
+            configPendaftaraanArea areaConfig = new configPendaftaraanArea();
+            List<configPendaftaraanArea> semuaArea = areaConfig.GetAllArea();
+
+            if (semuaArea.Count == 0)
+            {
+                Console.WriteLine("Belum ada area yang tersedia. Silakan daftarkan area terlebih dahulu.");
+                return;
+            }
+
+            Console.WriteLine("Pilih area pengambilan sampah:");
+            for (int i = 0; i < semuaArea.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {semuaArea[i].area}");
+            }
+
+            Console.Write("Masukkan nomor area: ");
+            string input = Console.ReadLine();
+            int nomorArea;
+
+            if (!int.TryParse(input, out nomorArea))
+            {
+                Console.WriteLine("Input bukan angka.");
+                return;
+            }
+
+            if (nomorArea < 1 || nomorArea > semuaArea.Count)
+            {
+                Console.WriteLine("Pilihan tidak valid.");
+                return;
+            }
+
+            configPendaftaraanArea areaTerpilih = semuaArea[nomorArea - 1];
+
+            Console.Write("Masukkan tanggal penjemputan (format: yyyy-MM-dd): ");
+            string inputTanggal = Console.ReadLine();
+            DateTime tanggalJemput;
+
+            if (!DateTime.TryParse(inputTanggal, out tanggalJemput))
+            {
+                Console.WriteLine("Tanggal tidak valid.");
+                return;
+            }
+
+            Console.Write("Masukkan keterangan tambahan (opsional): ");
+            string keterangan = Console.ReadLine();
+
+            var pendaftaran = new configPendaftaranPenjemputan<string>
+            {
+                namaPengguna = username,
+                Area = areaTerpilih,
+                Jadwal = tanggalJemput,
+                KeteranganTambahan = keterangan
+            };
+
+            pendaftaran.Simpan();
+        }
+
 
     }
 }
