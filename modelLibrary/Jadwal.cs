@@ -1,28 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-
-namespace modelLibrary  
+﻿namespace modelLibrary
 {
-    public class Jadwal <T>
+    public class Jadwal<T>
     {
         public DateOnly Tanggal { get; set; }
-        public List<T> jenisSampahList { get; set; }
-        public pengguna kurirPengambil { get; set; }
-        public string areaDiambil { get; set; }
+        public List<T> JenisSampahList { get; set; }
+        public pengguna KurirPengambil { get; set; }
+        public string AreaDiambil { get; set; }
 
         public Jadwal(DateOnly tanggalInput, List<T> jenisSampahListInput, string areaDiambilInput, pengguna kurirPengambilInput)
         {
             Tanggal = tanggalInput;
-            jenisSampahList = jenisSampahListInput;
-            kurirPengambil = kurirPengambilInput;
-            areaDiambil = areaDiambilInput;
+            JenisSampahList = jenisSampahListInput;
+            KurirPengambil = kurirPengambilInput;
+            AreaDiambil = areaDiambilInput;
         }
-
-        public Jadwal(){ }
     }
 }
