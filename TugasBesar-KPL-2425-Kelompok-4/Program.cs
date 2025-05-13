@@ -1,4 +1,6 @@
-﻿namespace TugasBesar_KPL_2425_Kelompok_4cat.gitignore
+﻿using TugasBesar_KPL_2425_Kelompok_4.UserProgram;
+
+namespace TugasBesar_KPL_2425_Kelompok_4cat.gitignore
 {
         class Program
         {
