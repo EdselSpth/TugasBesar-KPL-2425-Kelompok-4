@@ -54,18 +54,18 @@ namespace TugasBesar_KPL_2425_Kelompok_4.Penarikan_Keuntungan
             Console.WriteLine($"Biaya admin: {bankInfo.BiayaAdmin}");
             Console.WriteLine($"Jumlah yang akan diterima setelah potongan biaya admin: {totalDiterima}");
 
- 
-            currentState = PenarikanState.MENUNGGU_APPROVAL;
-            PenarikanAdmin.ProsesPenarikan(ref currentState, selectedBank, nominal);
 
-            if (currentState == PenarikanState.BERHASIL)
-            {
-                Console.WriteLine("\nPenarikan berhasil dikirim!");
-            }
-            else if (currentState == PenarikanState.DITOLAK)
-            {
-                Console.WriteLine("\nPenarikan ditolak oleh admin.");
-            }
+            currentState = PenarikanState.MENUNGGU_APPROVAL;
+            //PenarikanAdmin.ProsesPenarikan(ref currentState, selectedBank, nominal);
+
+            //if (currentState == PenarikanState.BERHASIL)
+            //{
+            //    Console.WriteLine("\nPenarikan berhasil dikirim!");
+            //}
+            //else if (currentState == PenarikanState.DITOLAK)
+            //{
+            //    Console.WriteLine("\nPenarikan ditolak oleh admin.");
+            //}
 
             Console.WriteLine("\nTekan sembarang tombol untuk keluar...");
             Console.ReadKey();

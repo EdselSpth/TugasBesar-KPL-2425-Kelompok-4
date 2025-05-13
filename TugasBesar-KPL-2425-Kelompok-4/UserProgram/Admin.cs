@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using TugasBesar_KPL_2425_Kelompok_4;
 using TugasBesar_KPL_2425_Kelompok_4.GarbageCollectionSchedule;
+using TugasBesar_KPL_2425_Kelompok_4.Penarikan_Keuntungan;
+using static TugasBesar_KPL_2425_Kelompok_4.Penarikan_Keuntungan.StateBasedPenarikan;
 
 namespace TugasBesar_KPL_2425_Kelompok_4.UserProgram
 {
@@ -36,6 +38,14 @@ namespace TugasBesar_KPL_2425_Kelompok_4.UserProgram
                         case 4:
                             DeleteFlow();
                             break;
+                        case 5:
+                            PenarikanState currentState = PenarikanState.MEMASUKKAN_DATA;
+                            PenarikanAdmin.ProsesPenarikan(ref currentState, Pembayaran.Bca, 100000);
+                            adminProgram();
+                            break;
+                        case 6:
+                            Console.WriteLine("Terima kasih sudah menggunakan aplikasi");
+                            break;
                         default:
                             Console.WriteLine("Pilihan tidak valid.");
                             break;
@@ -44,9 +54,8 @@ namespace TugasBesar_KPL_2425_Kelompok_4.UserProgram
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine($"Error {ex.Message}");
             }
-
         }
         static void createFlow()
         {
