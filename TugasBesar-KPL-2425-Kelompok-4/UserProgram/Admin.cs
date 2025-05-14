@@ -18,12 +18,13 @@ namespace TugasBesar_KPL_2425_Kelompok_4.UserProgram
         {
             try
             {
-                string login = "Edsel";
                 int menuInput = 9999;
                 while (menuInput != 6)
-                {
-                    Menu.menuAdmin(login);
+                {                    
+                    Menu.menuAdmin();
+                    Console.Write("Pilih Menu : ");
                     menuInput = Convert.ToInt32(Console.ReadLine());
+                    Menu.header();
                     switch (menuInput)
                     {
                         case 1:

@@ -14,7 +14,7 @@ namespace TugasBesar_KPL_2425_Kelompok_4.UserProgram
             try
             {
                 string username = "Agus";
-                Menu.menuKurir(username);
+                Menu.menuKurir();
                 int pilihanuser = 999;
                 while (pilihanuser != 2)
                 {

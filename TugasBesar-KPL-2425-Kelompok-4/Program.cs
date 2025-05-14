@@ -16,8 +16,8 @@ namespace TugasBesar_KPL_2425_Kelompok_4cat.gitignore
             Console.WriteLine("Tio Funny Tinambunan - 103022330036");
             Console.WriteLine("=====================================\n");
 
-
-            Pengguna.PenggunaProgram();
+            Admin.adminProgram();
+            //Pengguna.PenggunaProgram();
         }
     }
 }
