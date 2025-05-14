@@ -27,9 +27,6 @@ namespace TugasBesar_KPL_2425_Kelompok_4
             Console.WriteLine("=====================================\n");
         }
 
-            Admin.adminProgram();
-            //Pengguna.PenggunaProgram();
-        }
         static async Task ShowMainMenu()
         {
             Console.WriteLine("Pilih opsi:");
