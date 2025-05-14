@@ -67,6 +67,13 @@ namespace TugasBesar_KPL_2425_Kelompok_4.Penarikan_Keuntungan
             //    Console.WriteLine("\nPenarikan ditolak oleh admin.");
             //}
 
+            Console.WriteLine("\nMemproses penarikan, mohon tunggu...");
+            Thread.Sleep(2000);
+
+            currentState = PenarikanState.BERHASIL;
+            Console.WriteLine("\nPenarikan berhasil dikirim ke rekening Anda!");
+            Console.WriteLine($"Total diterima: {totalDiterima} ({selectedBank})");
+
             Console.WriteLine("\nTekan sembarang tombol untuk keluar...");
             Console.ReadKey();
         }
