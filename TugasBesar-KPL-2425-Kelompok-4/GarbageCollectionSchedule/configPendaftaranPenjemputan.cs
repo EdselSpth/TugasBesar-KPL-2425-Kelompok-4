@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.Json;
 using modelLibrary;
+using JadwalAPI;
+using TugasBesar_KPL_2425_Kelompok_4.UserProgram;
 
 namespace TugasBesar_KPL_2425_Kelompok_4.GarbageCollectionSchedule
 {
@@ -66,13 +68,13 @@ namespace TugasBesar_KPL_2425_Kelompok_4.GarbageCollectionSchedule
         {
             configPendaftaraanArea areaConfig = new configPendaftaraanArea();
             List<configPendaftaraanArea> semuaArea = areaConfig.GetAllArea();
-
+      
             if (semuaArea.Count == 0)
             {
                 Console.WriteLine("Belum ada area yang tersedia. Silakan daftarkan area terlebih dahulu.");
                 return;
             }
-
+            jadwalService.ViewJadwal();
             Console.WriteLine("Pilih area pengambilan sampah:");
             for (int i = 0; i < semuaArea.Count; i++)
             {
@@ -95,8 +97,9 @@ namespace TugasBesar_KPL_2425_Kelompok_4.GarbageCollectionSchedule
                 return;
             }
 
+           
             configPendaftaraanArea areaTerpilih = semuaArea[nomorArea - 1];
-
+            
             Console.Write("Masukkan tanggal penjemputan (format: yyyy-MM-dd): ");
             string inputTanggal = Console.ReadLine();
             DateTime tanggalJemput;
