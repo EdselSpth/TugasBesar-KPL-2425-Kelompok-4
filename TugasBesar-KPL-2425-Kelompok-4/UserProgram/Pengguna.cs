@@ -10,6 +10,19 @@ using static TugasBesar_KPL_2425_Kelompok_4.Penarikan_Keuntungan.StateBasedPenar
 
 namespace TugasBesar_KPL_2425_Kelompok_4.UserProgram
 {
+    public class DataPenarikan
+    {
+        public string NamaPengguna { get; set; }
+        public string MetodePembayaran { get; set; }
+        public decimal Nominal { get; set; }
+
+        public DataPenarikan(string nama, string metode, decimal nominal)
+        {
+            NamaPengguna = nama;
+            MetodePembayaran = metode;
+            Nominal = nominal;
+        }
+    }
     class Pengguna
     {
         public static void PenggunaProgram()
@@ -28,6 +41,7 @@ namespace TugasBesar_KPL_2425_Kelompok_4.UserProgram
                             jadwalService.ViewJadwal();
                             break;
                         case 2:
+
                             PenarikanCustomer.StateBasedPenarikanCustomer();
                             break;
                         case 3:
