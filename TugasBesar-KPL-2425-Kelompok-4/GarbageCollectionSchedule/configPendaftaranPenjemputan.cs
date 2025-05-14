@@ -19,7 +19,7 @@ namespace TugasBesar_KPL_2425_Kelompok_4.GarbageCollectionSchedule
         public string namaPengguna { get; set; }
         public configPendaftaraanArea Area { get; set; }
         public DateTime Jadwal { get; set; }
-        public T KeteranganTambahan { get; set; }
+        public T Keterangan { get; set; }
 
         public void Simpan()
         {
@@ -68,20 +68,20 @@ namespace TugasBesar_KPL_2425_Kelompok_4.GarbageCollectionSchedule
         {
             configPendaftaraanArea areaConfig = new configPendaftaraanArea();
             List<configPendaftaraanArea> semuaArea = areaConfig.GetAllArea();
-      
+            
             if (semuaArea.Count == 0)
             {
                 Console.WriteLine("Belum ada area yang tersedia. Silakan daftarkan area terlebih dahulu.");
                 return;
             }
-            jadwalService.ViewJadwal();
-            Console.WriteLine("Pilih area pengambilan sampah:");
+
+            Console.WriteLine("area pengambilan sampah");
             for (int i = 0; i < semuaArea.Count; i++)
             {
                 Console.WriteLine($"{i + 1}. {semuaArea[i].area}");
             }
-
-            Console.Write("Masukkan nomor area: ");
+            jadwalService.ViewJadwal();
+            Console.Write("Masukkan nomor area terlebih dahulu: ");
             string input = Console.ReadLine();
             int nomorArea;
 
@@ -109,8 +109,23 @@ namespace TugasBesar_KPL_2425_Kelompok_4.GarbageCollectionSchedule
                 Console.WriteLine("Tanggal tidak valid.");
                 return;
             }
+            DateOnly tgl = DateOnly.FromDateTime(tanggalJemput);
+            var hari = tgl.DayOfWeek;
 
-            Console.Write("Masukkan keterangan tambahan (opsional): ");
+            var jenisYangValid = Enum.GetValues(typeof(JenisSampah)).Cast<JenisSampah>().Where(js => rulesJadwal.pengambilanValidasi(js, tanggalJemput)).ToList();
+
+            if (jenisYangValid.Count == 0)
+            {
+                Console.WriteLine("Tidak ada sampah yang dijadwalkan pada hari tersebut.");
+                return;
+            }
+
+            Console.WriteLine("Sampah yang dapat disetorkan:");
+            foreach (var jenis in jenisYangValid)
+            {
+                Console.WriteLine(jenis.ToString().ToLower());
+            }
+            Console.Write("Masukkan keterangan jumlah sampah: ");
             string keterangan = Console.ReadLine();
 
             var pendaftaran = new configPendaftaranPenjemputan<string>
@@ -118,7 +133,7 @@ namespace TugasBesar_KPL_2425_Kelompok_4.GarbageCollectionSchedule
                 namaPengguna = username,
                 Area = areaTerpilih,
                 Jadwal = tanggalJemput,
-                KeteranganTambahan = keterangan
+                Keterangan = keterangan
             };
 
             pendaftaran.Simpan();
