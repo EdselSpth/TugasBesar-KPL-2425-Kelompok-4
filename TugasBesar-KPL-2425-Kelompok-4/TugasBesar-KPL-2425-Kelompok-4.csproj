@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\JadwalAPI\JadwalAPI.csproj" />
+    <ProjectReference Include="..\LoginAPI\LoginAPI.csproj" />
     <ProjectReference Include="..\modelLibrary\modelLibrary.csproj" />
   </ItemGroup>
 
