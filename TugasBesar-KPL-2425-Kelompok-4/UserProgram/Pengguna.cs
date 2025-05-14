@@ -20,7 +20,7 @@ namespace TugasBesar_KPL_2425_Kelompok_4.UserProgram
                 int inputUser = 999;
                 while (inputUser != 5)
                 {
-                    Menu.menuUser(username);
+                    Menu.menuUser();
                     inputUser = Convert.ToInt32(Console.ReadLine());
                     switch (inputUser)
                     {
