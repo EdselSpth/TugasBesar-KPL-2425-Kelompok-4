@@ -53,7 +53,7 @@ namespace TugasBesar_KPL_2425_Kelompok_4.GarbageCollectionSchedule
 
                 string newData = JsonSerializer.Serialize(listArea, new JsonSerializerOptions { WriteIndented = true });
                 File.WriteAllText(configPath, newData);
-                Console.WriteLine("Data area berhasil disimpan.");
+                Console.WriteLine(" Data Area berhasil disimpan.");
             }
             catch (Exception ex)
             {
