@@ -24,6 +24,7 @@ namespace TugasBesar_KPL_2425_Kelompok_4.Penarikan_Keuntungan
             decimal totalDiterima = nominal - info.BiayaAdmin;
 
             Console.WriteLine("\n=== Fitur Penarikan Keuntungan (Admin) ===");
+            Console.WriteLine("Saldo                : 200000");
             Console.WriteLine($"Metode Pembayaran    : {info.Deskripsi}");
             Console.WriteLine($"Biaya Admin          : {info.BiayaAdmin}");
             Console.WriteLine($"Minimal Penarikan    : {info.MinimalPenarikan}");
