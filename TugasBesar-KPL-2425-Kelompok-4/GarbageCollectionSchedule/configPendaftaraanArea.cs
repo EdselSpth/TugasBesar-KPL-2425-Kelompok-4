@@ -14,7 +14,14 @@ namespace TugasBesar_KPL_2425_Kelompok_4.GarbageCollectionSchedule
         private string configPath = "daftarArea.json";
         public int id { get; set; }
         public string area { get; set; }
+        // Constructor dengan default path (untuk produksi)
+        public configPendaftaraanArea() : this("daftarArea.json") { }
 
+        // Constructor dengan custom path (untuk unit test)
+        public configPendaftaraanArea(string customPath)
+        {
+            configPath = customPath;
+        }
         public List<configPendaftaraanArea> GetAllArea()
         {
             List<configPendaftaraanArea> listArea = new();
@@ -38,7 +45,13 @@ namespace TugasBesar_KPL_2425_Kelompok_4.GarbageCollectionSchedule
             try
             {
                 var listArea = GetAllArea();
-
+                // Cegah area duplikat
+                if (listArea.Any(a => a.area != null &&
+                                      a.area.Equals(this.area, StringComparison.OrdinalIgnoreCase)))
+                {
+                    Console.WriteLine("Area sudah ada. Tidak disimpan ulang.");
+                    return;
+                }
                 int maxId = 0;
                 foreach (var i in listArea)
                 {
@@ -118,5 +131,3 @@ namespace TugasBesar_KPL_2425_Kelompok_4.GarbageCollectionSchedule
 
     }
 };
-
-            
