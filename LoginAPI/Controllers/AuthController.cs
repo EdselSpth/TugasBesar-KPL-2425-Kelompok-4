@@ -38,6 +38,11 @@ namespace LoginAPI.Controllers
         [HttpPost("register")]
         public IActionResult Register([FromBody] User newUser)
         {
+            if (!Enum.IsDefined(typeof(Role), newUser.Role))
+            {
+                return BadRequest(new { message = "Role tidak valid!! harus salah satu dari admin, kurir atau user" });
+            }
+
             var existingUser = users.FirstOrDefault(u => u.Username == newUser.Username);
             if (existingUser != null)
             {
