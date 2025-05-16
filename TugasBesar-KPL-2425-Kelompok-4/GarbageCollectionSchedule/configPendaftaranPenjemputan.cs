@@ -21,13 +21,13 @@ namespace TugasBesar_KPL_2425_Kelompok_4.GarbageCollectionSchedule
         public DateTime Jadwal { get; set; }
         public T Keterangan { get; set; }
 
-        // Konstruktor default
+        
         public configPendaftaranPenjemputan()
         {
             configPath = "Riwayat_Pendaftaran_Penjemputan.json";
         }
 
-        // Konstruktor untuk testing (custom path)
+       
         public configPendaftaranPenjemputan(string path)
         {
             configPath = path;
@@ -75,7 +75,7 @@ namespace TugasBesar_KPL_2425_Kelompok_4.GarbageCollectionSchedule
             Console.WriteLine("Pendaftaran berhasil disimpan.");
 
         }
-        // Tambahan untuk test: Mengambil semua pendaftaran
+     
         public List<configPendaftaranPenjemputan<T>> AmbilSemua()
         {
             if (!File.Exists(configPath)) return new List<configPendaftaranPenjemputan<T>>();

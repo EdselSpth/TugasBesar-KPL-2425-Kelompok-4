@@ -5,7 +5,6 @@ using System.Text;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
-
 namespace TugasBesar_KPL_2425_Kelompok_4.GarbageCollectionSchedule
 {
 
@@ -14,10 +13,10 @@ namespace TugasBesar_KPL_2425_Kelompok_4.GarbageCollectionSchedule
         private string configPath = "daftarArea.json";
         public int id { get; set; }
         public string area { get; set; }
-        // Constructor dengan default path (untuk produksi)
+  
         public configPendaftaraanArea() : this("daftarArea.json") { }
 
-        // Constructor dengan custom path (untuk unit test)
+       
         public configPendaftaraanArea(string customPath)
         {
             configPath = customPath;
@@ -45,7 +44,7 @@ namespace TugasBesar_KPL_2425_Kelompok_4.GarbageCollectionSchedule
             try
             {
                 var listArea = GetAllArea();
-                // Cegah area duplikat
+             
                 if (listArea.Any(a => a.area != null &&
                                       a.area.Equals(this.area, StringComparison.OrdinalIgnoreCase)))
                 {
