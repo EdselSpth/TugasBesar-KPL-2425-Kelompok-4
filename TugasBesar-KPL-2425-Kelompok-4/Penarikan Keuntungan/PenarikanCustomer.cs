@@ -60,7 +60,6 @@ namespace TugasBesar_KPL_2425_Kelompok_4.Penarikan_Keuntungan
             decimal totalDiterima = nominal - info.BiayaAdmin;
             Console.WriteLine($"Jumlah yang akan diterima setelah dipotong biaya admin ({info.BiayaAdmin}): {totalDiterima}");
 
-            // Buat nyimpen PenarikanDatanya
             RiwayatPenarikan.Add(new PenarikanData(rekening, nominal, selectedMethod));
             currentState = StateBasedPenarikan.GetNextState(currentState, PenarikanTrigger.SUBMIT);
 

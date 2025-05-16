@@ -34,7 +34,9 @@ namespace TugasBesar_KPL_2425_Kelompok_4.UserProgram
                 while (inputUser != 5)
                 {
                     Menu.menuUser();
+                    Console.Write("Pilih Menu: ");
                     inputUser = Convert.ToInt32(Console.ReadLine());
+                    Menu.header();
                     switch (inputUser)
                     {
                         case 1:

@@ -68,7 +68,6 @@ namespace TugasBesar_KPL_2425_Kelompok_4.UserProgram
                 return;
             }
 
-            // Pengecekan tanggal
             if (tanggal < DateOnly.FromDateTime(DateTime.Now))
             {
                 Console.WriteLine("Tanggal tidak boleh berada di masa lalu.\n");
@@ -119,7 +118,6 @@ namespace TugasBesar_KPL_2425_Kelompok_4.UserProgram
                 return;
             }
 
-            // Validasi hari pengambilan berdasarkan rules
             var invalid = jenisList.Where(j => !rulesJadwal.pengambilanValidasi(j, tanggal.ToDateTime(TimeOnly.MinValue))).ToList();
             if (invalid.Any())
             {

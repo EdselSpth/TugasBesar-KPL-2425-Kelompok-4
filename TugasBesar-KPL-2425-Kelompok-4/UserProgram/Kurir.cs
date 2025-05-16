@@ -13,13 +13,13 @@ namespace TugasBesar_KPL_2425_Kelompok_4.UserProgram
         {
             try
             {
-                Menu.menuKurir();
                 int pilihanuser = 999;
-                
                 while (pilihanuser != 2)
                 {
+                    Menu.menuKurir();
                     Console.Write("Pilih Menu: ");
                     pilihanuser = Convert.ToInt32(Console.ReadLine());
+                    Menu.header();
                     switch (pilihanuser)
                     {
                         case 1:
