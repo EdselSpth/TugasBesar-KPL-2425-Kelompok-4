@@ -52,7 +52,7 @@ namespace TugasBesar_KPL_2425_Kelompok_4
             else
             {
                 Console.WriteLine("Pilihan tidak valid.");
-                await ShowMainMenu();  // Menampilkan menu lagi jika input tidak valid
+                await ShowMainMenu();  
             }
         }
 
@@ -99,14 +99,13 @@ namespace TugasBesar_KPL_2425_Kelompok_4
                         break;
                 }
 
-                // Kembali ke menu utama setelah selesai
                 await ShowMainMenu();
             }
             else
             {
                 var error = await response.Content.ReadAsStringAsync();
                 Console.WriteLine($"Login Gagal! {error}");
-                await ShowMainMenu();  // Kembali ke menu utama jika login gagal
+                await ShowMainMenu(); 
             }
         }
 
@@ -146,7 +145,6 @@ namespace TugasBesar_KPL_2425_Kelompok_4
                 Console.WriteLine($"Register gagal! {error}\n");
             }
 
-            // Kembali ke menu utama setelah registrasi selesai
             await ShowMainMenu();
         }
     }
