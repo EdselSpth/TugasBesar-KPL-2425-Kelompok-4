@@ -44,10 +44,10 @@ namespace TugasBesar_KPL_2425_Kelompok_4.UserProgram
                             PenarikanAdmin.ProsesPenarikan(ref currentState, Pembayaran.Bca, 100000);
                             break;
                         case 6:
-                            Console.WriteLine("Terima kasih sudah menggunakan aplikasi");
+                            Console.WriteLine("Terima kasih sudah menggunakan aplikasi\n");
                             break;
                         default:
-                            Console.WriteLine("Pilihan tidak valid.");
+                            Console.WriteLine("Pilihan tidak valid.\n");
                             break;
                     }
                 }
@@ -59,17 +59,18 @@ namespace TugasBesar_KPL_2425_Kelompok_4.UserProgram
         }
         static void createFlow()
         {
+            Console.WriteLine("\n∘<<──────>>∘ TAMBAH JADWAL PENGAMBILAN SAMPAH ∘<<──────>>∘");
             Console.Write("Masukkan tanggal (yyyy-MM-dd): ");
             if (!DateOnly.TryParse(Console.ReadLine(), out var tanggal))
             {
-                Console.WriteLine("Format tanggal tidak valid.");
+                Console.WriteLine("Format tanggal tidak valid.\n");
                 return;
             }
 
             // Pengecekan tanggal
             if (tanggal < DateOnly.FromDateTime(DateTime.Now))
             {
-                Console.WriteLine("Tanggal tidak boleh berada di masa lalu.");
+                Console.WriteLine("Tanggal tidak boleh berada di masa lalu.\n");
                 return;
             }
 
@@ -90,7 +91,7 @@ namespace TugasBesar_KPL_2425_Kelompok_4.UserProgram
 
             if (!jenisList.Any())
             {
-                Console.WriteLine("Daftar jenis sampah tidak boleh kosong.");
+                Console.WriteLine("Daftar jenis sampah tidak boleh kosong.\n");
                 return;
             }
 
@@ -98,7 +99,7 @@ namespace TugasBesar_KPL_2425_Kelompok_4.UserProgram
             var namaKurir = Console.ReadLine();
             if (string.IsNullOrWhiteSpace(namaKurir))
             {
-                Console.WriteLine("Nama kurir tidak boleh kosong.");
+                Console.WriteLine("Nama kurir tidak boleh kosong.\n");
                 return;
             }
 
@@ -106,15 +107,14 @@ namespace TugasBesar_KPL_2425_Kelompok_4.UserProgram
             var area = Console.ReadLine();
             if (string.IsNullOrWhiteSpace(area))
             {
-                Console.WriteLine("Area pengambilan tidak boleh kosong.");
+                Console.WriteLine("Area pengambilan tidak boleh kosong.\n");
                 return;
             }
 
-            // Validasi role kurir
             var kurirObj = new pengguna(namaKurir, JenisPengguna.Kurir);
             if (kurirObj.peran != JenisPengguna.Kurir)
             {
-                Console.WriteLine("Hanya peran Kurir yang dapat membuat jadwal.");
+                Console.WriteLine("Hanya peran Kurir yang dapat membuat jadwal.\n");
                 return;
             }
 
@@ -122,35 +122,38 @@ namespace TugasBesar_KPL_2425_Kelompok_4.UserProgram
             var invalid = jenisList.Where(j => !rulesJadwal.pengambilanValidasi(j, tanggal.ToDateTime(TimeOnly.MinValue))).ToList();
             if (invalid.Any())
             {
-                Console.WriteLine($"Jenis berikut tidak dijadwalkan pada {tanggal.DayOfWeek}: {string.Join(", ", invalid)}");
+                Console.WriteLine($"Jenis berikut tidak dijadwalkan pada {tanggal.DayOfWeek}: {string.Join(", ", invalid)} \n");
                 return;
             }
 
             try
             {
                 jadwalService.CreateAndSendJadwal(tanggal, jenisList, namaKurir, area);
+                Console.WriteLine("\n");
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error: {ex.Message}");
+                Console.WriteLine("\n");
             }
         }
 
         static void editFlow()
         {
+            Console.WriteLine("\n∘<<──────>>∘ EDIT JADWAL PENGAMBILAN SAMPAH ∘<<──────>>∘ ");
             Console.Write("Masukkan nama kurir: ");
             var namaKurir = Console.ReadLine();
             Console.Write("Masukkan tanggal jadwal yang akan di-edit (yyyy-MM-dd): ");
             if (!DateOnly.TryParse(Console.ReadLine(), out var editDate))
             {
-                Console.WriteLine("Format tanggal tidak valid.");
+                Console.WriteLine("Format tanggal tidak valid.\n");
                 return;
             }
 
             var jadwal = jadwalService.GetJadwalByKurirDanTanggal(namaKurir, editDate);
             if (jadwal == null)
             {
-                Console.WriteLine("Jadwal tidak ditemukan di API.");
+                Console.WriteLine("Jadwal tidak ditemukan di API.\n");
                 return;
             }
 
@@ -161,6 +164,7 @@ namespace TugasBesar_KPL_2425_Kelompok_4.UserProgram
             for (int i = 0; i < jenisValues.Length; i++)
                 Console.WriteLine($" {i}: {jenisValues[i]}");
 
+            Console.Write("Pilih: ");
             var inputIdx = Console.ReadLine();
             var jenisList = string.IsNullOrWhiteSpace(inputIdx)
                 ? jadwal.JenisSampah.Select(s => Enum.Parse<JenisSampah>(s)).ToList()
@@ -186,7 +190,7 @@ namespace TugasBesar_KPL_2425_Kelompok_4.UserProgram
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error update: {ex.Message}");
+                Console.WriteLine($"Error update: {ex.Message}\n");
             }
         }
 
@@ -198,10 +202,12 @@ namespace TugasBesar_KPL_2425_Kelompok_4.UserProgram
             if (!DateOnly.TryParse(Console.ReadLine(), out var tanggal))
             {
                 Console.WriteLine("Format tanggal tidak valid.");
+                Console.WriteLine("\n");
                 return;
             }
 
             jadwalService.DeleteJadwalByKurirDanTanggal(namaKurir, tanggal);
+            Console.WriteLine("\n");
         }
 
     }

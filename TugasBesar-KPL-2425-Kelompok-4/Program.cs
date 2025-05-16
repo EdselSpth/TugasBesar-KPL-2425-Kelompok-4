@@ -29,6 +29,7 @@ namespace TugasBesar_KPL_2425_Kelompok_4
 
         static async Task ShowMainMenu()
         {
+            Menu.header();
             Console.WriteLine("Pilih opsi:");
             Console.WriteLine("1. Login");
             Console.WriteLine("2. Register");
@@ -137,12 +138,12 @@ namespace TugasBesar_KPL_2425_Kelompok_4
 
             if (response.IsSuccessStatusCode)
             {
-                Console.WriteLine("Register berhasil!");
+                Console.WriteLine("Register berhasil!\n");
             }
             else
             {
                 var error = await response.Content.ReadAsStringAsync();
-                Console.WriteLine($"Register gagal! {error}");
+                Console.WriteLine($"Register gagal! {error}\n");
             }
 
             // Kembali ke menu utama setelah registrasi selesai

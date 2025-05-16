@@ -39,13 +39,13 @@ namespace TugasBesar_KPL_2425_Kelompok_4.Penarikan_Keuntungan
 
             if (approval == "1")
             {
-                Console.WriteLine("Permintaan penarikan disetujui.");
+                Console.WriteLine("Permintaan penarikan disetujui.\n");
                 currentState = StateBasedPenarikan.GetNextState(currentState, PenarikanTrigger.APPROVE);
                 currentState = StateBasedPenarikan.GetNextState(currentState, PenarikanTrigger.TRANSFER);
             }
             else
             {
-                Console.WriteLine("Permintaan penarikan ditolak.");
+                Console.WriteLine("Permintaan penarikan ditolak.\n");
                 currentState = StateBasedPenarikan.GetNextState(currentState, PenarikanTrigger.REJECT);
             }
         }

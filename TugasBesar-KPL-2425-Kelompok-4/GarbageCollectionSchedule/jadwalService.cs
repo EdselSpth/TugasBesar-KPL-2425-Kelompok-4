@@ -90,7 +90,7 @@ namespace TugasBesar_KPL_2425_Kelompok_4.GarbageCollectionSchedule
                 Console.WriteLine("Tidak ada jadwal yang tersedia di API.");
                 return;
             }
-            Console.WriteLine("=== Daftar Jadwal ===");
+            Console.WriteLine("\n∘<<──────>>∘∘JADWAL PENGAMBILAN SAMPAH∘∘<<──────>>∘");
             foreach (var j in jadwalList)
             {
                 Console.WriteLine($"Tanggal: {j.Tanggal:yyyy-MM-dd} ({j.Hari})");
@@ -131,7 +131,7 @@ namespace TugasBesar_KPL_2425_Kelompok_4.GarbageCollectionSchedule
 
             var fileName = $"jadwal_{tanggal:yyyyMMdd}.json";
             File.WriteAllText(fileName, JsonSerializer.Serialize(model, new JsonSerializerOptions { WriteIndented = true }));
-            Console.WriteLine($"File lokal {fileName} berhasil diperbarui.");
+            Console.WriteLine($"File lokal {fileName} berhasil diperbarui.\n");
         }
 
         public static void DeleteJadwalByKurirDanTanggal(string namaKurir, DateOnly tanggal)
@@ -180,7 +180,7 @@ namespace TugasBesar_KPL_2425_Kelompok_4.GarbageCollectionSchedule
             {
                 var updatedJson = JsonSerializer.Serialize(list, options);
                 File.WriteAllText(fileName, updatedJson);
-                Console.WriteLine($"Entitas jadwal '{namaKurir}' pada {tanggal:yyyy-MM-dd} dihapus dari {fileName}.");
+                Console.WriteLine($"jadwal pengambilan oleh kurir '{namaKurir}' pada {tanggal:yyyy-MM-dd} dihapus dari {fileName}.\n");
             }
         }
     }

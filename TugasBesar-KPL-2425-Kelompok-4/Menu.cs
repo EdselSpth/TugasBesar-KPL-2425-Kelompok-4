@@ -10,38 +10,38 @@ namespace TugasBesar_KPL_2425_Kelompok_4
     {
         public static void menuAdmin()
         {
-            Console.WriteLine("∘<<──────>>∘ Menu Admin ∘<<──────>>∘");
+            Console.WriteLine("∘<<──────>>∘∘<<──────>>∘ Menu Admin ∘<<──────>>∘∘<<──────>>∘");
             Console.WriteLine("(1) Menjadwalkan pengambilan sampah");
             Console.WriteLine("(2) Melihat jadwal pengambilan sampah");
             Console.WriteLine("(3) Mengubah jadwal pengambilan sampah");
             Console.WriteLine("(4) Menghapus jadwal pengambilan sampah");
             Console.WriteLine("(5) Menyetujui penarikan keuntungan");
             Console.WriteLine("(6) Keluar");
-            Console.WriteLine("∘<<──────>>∘∘<<──────>>∘∘<<──────>>∘");
+            Console.WriteLine("∘<<──────>>∘∘<<──────>>∘∘<<──────>>∘∘<<──────>>∘∘<<──────>>∘");
         }
 
         public static void menuUser()
         {
-            Console.WriteLine("∘<<──────>>∘ Menu Pengguna ∘<<──────>>∘");
+            Console.WriteLine("∘<<──────>>∘∘<<──────>>∘ Menu Pengguna ∘<<──────>>∘∘<<──────>>∘");
             Console.WriteLine("(1) Melihat jadwal pengambilan sampah");
             Console.WriteLine("(2) Menarik keuntungan dari sampah");
             Console.WriteLine("(3) Mendaftarkan area pengambilan sampah");
             Console.WriteLine("(4) Mendaftarkan pengambilan sampah");
             Console.WriteLine("(5) Keluar");
-            Console.WriteLine("∘<<──────>>∘∘<<──────>>∘∘<<──────>>∘");
+            Console.WriteLine("∘<<──────>>∘∘<<──────>>∘∘<<──────>>∘∘<<──────>>∘∘<<──────>>∘");
         }
 
         public static void menuKurir()
         {
-            Console.WriteLine("∘<<──────>>∘ Menu Kurir ∘<<──────>>∘");
+            Console.WriteLine("∘<<──────>>∘∘<<──────>>∘ Menu Kurir ∘<<──────>>∘∘<<──────>>∘");
             Console.WriteLine("(1) Melihat jadwal pengambilan sampah");
             Console.WriteLine("(2) Keluar");
-            Console.WriteLine("∘<<──────>>∘∘<<──────>>∘∘<<──────>>∘");
+            Console.WriteLine("∘<<──────>>∘∘<<──────>>∘∘<<──────>>∘∘<<──────>>∘∘<<──────>>∘");
         }
         
         public static void header()
         {
-            Console.WriteLine("∘<<──────>>∘∘<<──────>>∘∘<<──────>>∘");
+            Console.WriteLine("∘<<──────>>∘∘<<──────>>∘∘<<──────>>∘∘<<──────>>∘∘<<──────>>∘");
         }
     }
 }
