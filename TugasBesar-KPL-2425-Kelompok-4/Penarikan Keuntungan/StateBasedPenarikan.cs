@@ -5,14 +5,14 @@ namespace TugasBesar_KPL_2425_Kelompok_4.Penarikan_Keuntungan
 {
     public enum Pembayaran
     {
-        Tunai = 1,
-        Bca,
-        Bni,
-        Mandiri,
-        Bri,
-        ShopeePay,
-        Gopay,
-        Dana
+        Tunai = 0,
+        Bca = 1,
+        Bni = 2,
+        Mandiri = 3,
+        Bri = 4,
+        ShopeePay = 5,
+        Gopay = 6,
+        Dana = 7
     }
 
     public class PembayaranInfo
@@ -34,18 +34,16 @@ namespace TugasBesar_KPL_2425_Kelompok_4.Penarikan_Keuntungan
         public enum PenarikanState
         {
             MEMASUKKAN_DATA,
-            VALIDASI,
+            MENUNGGU_APPROVAL,
             BERHASIL,
             GAGAL,
-            MENUNGGU_APPROVAL,
-            DITERIMA,
-            DITOLAK
+            DITOLAK,
+            TRANSFERSEDANGBERJALAN
         }
 
         public enum PenarikanTrigger
         {
             SUBMIT,
-            VALID,
             INVALID,
             RETRY,
             APPROVE,
@@ -77,29 +75,22 @@ namespace TugasBesar_KPL_2425_Kelompok_4.Penarikan_Keuntungan
                 }
             },
             {
-                PenarikanState.VALIDASI, new Dictionary<PenarikanTrigger, PenarikanState>
+                PenarikanState.MENUNGGU_APPROVAL, new Dictionary<PenarikanTrigger, PenarikanState>
                 {
-                    { PenarikanTrigger.VALID, PenarikanState.BERHASIL },
-                    { PenarikanTrigger.INVALID, PenarikanState.GAGAL }
+                    { PenarikanTrigger.APPROVE, PenarikanState.TRANSFERSEDANGBERJALAN },
+                    { PenarikanTrigger.REJECT, PenarikanState.DITOLAK }
+                }
+            },
+            {
+                PenarikanState.TRANSFERSEDANGBERJALAN, new Dictionary<PenarikanTrigger, PenarikanState>
+                {
+                    { PenarikanTrigger.TRANSFER, PenarikanState.BERHASIL }
                 }
             },
             {
                 PenarikanState.GAGAL, new Dictionary<PenarikanTrigger, PenarikanState>
                 {
                     { PenarikanTrigger.RETRY, PenarikanState.MEMASUKKAN_DATA }
-                }
-            },
-            {
-                PenarikanState.MENUNGGU_APPROVAL, new Dictionary<PenarikanTrigger, PenarikanState>
-                {
-                    { PenarikanTrigger.APPROVE, PenarikanState.DITERIMA },
-                    { PenarikanTrigger.REJECT, PenarikanState.DITOLAK }
-                }
-            },
-            {
-                PenarikanState.DITERIMA, new Dictionary<PenarikanTrigger, PenarikanState>
-                {
-                    { PenarikanTrigger.TRANSFER, PenarikanState.BERHASIL }
                 }
             },
             {
@@ -116,7 +107,7 @@ namespace TugasBesar_KPL_2425_Kelompok_4.Penarikan_Keuntungan
             {
                 return stateTransitionTable[prevState][trigger];
             }
-            return prevState; 
+            return prevState;
         }
     }
 }

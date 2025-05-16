@@ -1,78 +1,76 @@
 ﻿using System;
 using static TugasBesar_KPL_2425_Kelompok_4.Penarikan_Keuntungan.StateBasedPenarikan;
-using TugasBesar_KPL_2425_Kelompok_4.Penarikan_Keuntungan; 
+using TugasBesar_KPL_2425_Kelompok_4.Penarikan_Keuntungan;
 namespace TugasBesar_KPL_2425_Kelompok_4.Penarikan_Keuntungan
 {
-    public class PenarikanCustomer
+    public static class PenarikanCustomer
     {
-        public static PenarikanState currentState = PenarikanState.MEMASUKKAN_DATA;
+        public static List<PenarikanData> RiwayatPenarikan = new();
 
-        public static void StateBasedPenarikanCustomer()
+        public static readonly Dictionary<Pembayaran, PembayaranInfo> PembayaranTable = new()
         {
-            Console.WriteLine("=== Fitur Penarikan Keuntungan (Customer) ===");
+            { Pembayaran.Tunai, new PembayaranInfo("Pembayaran menggunakan uang tunai", 0, 50000) },
+            { Pembayaran.Bca, new PembayaranInfo("Transfer melalui BCA", 5000, 50000) },
+            { Pembayaran.Bni, new PembayaranInfo("Transfer melalui BNI", 5000, 50000) },
+            { Pembayaran.Mandiri, new PembayaranInfo("Transfer melalui Mandiri", 5000, 50000) },
+            { Pembayaran.Bri, new PembayaranInfo("Transfer melalui BRI", 5000, 50000) },
+            { Pembayaran.ShopeePay, new PembayaranInfo("Pembayaran melalui ShopeePay", 1000, 50000) },
+            { Pembayaran.Gopay, new PembayaranInfo("Pembayaran melalui Gopay", 1000, 50000) },
+            { Pembayaran.Dana, new PembayaranInfo("Pembayaran melalui Dana", 1000, 50000) },
+        };
 
-            Console.Write("\nNomor Rekening: ");
-            string norek = Console.ReadLine();
-
-            Console.Write("Jumlah Penarikan: ");
-            string jumlah = Console.ReadLine();
-
-      
-            Console.WriteLine($"\nNomor Rekening: {norek}");
-            Console.WriteLine($"Jumlah Penarikan: {jumlah}");
-
-     
-            Console.WriteLine("\nPilih metode pembayaran:");
-            foreach (var pembayaran in Enum.GetValues(typeof(Pembayaran)))
-            {
-                Console.WriteLine($"{(int)pembayaran}. {pembayaran}");
-            }
-
-            Console.Write("Masukkan nomor metode pembayaran yang dipilih: ");
-            int bankChoice = int.Parse(Console.ReadLine());
-
-            Pembayaran selectedBank = (Pembayaran)bankChoice;
-            PembayaranInfo bankInfo = PenarikanAdmin.PembayaranTable[selectedBank];
+        public static void ProsesPenarikan(ref PenarikanState currentState)
+        {
+            Console.WriteLine("\n=== Fitur Penarikan Keuntungan ===");
 
             decimal nominal = 0;
-            if (!decimal.TryParse(jumlah, out nominal) || nominal < bankInfo.MinimalPenarikan)
+            while (true)
             {
-                Console.WriteLine("Jumlah penarikan kurang dari minimal.");
-                Console.ReadKey();
+                Console.Write("Masukkan jumlah penarikan: ");
+                if (decimal.TryParse(Console.ReadLine(), out nominal) && nominal > 0)
+                    break;
+                Console.WriteLine("Input nominal tidak valid. Silakan coba lagi.");
+            }
+
+            Console.Write("Masukkan nomor rekening: ");
+            string rekening = Console.ReadLine();
+
+            Console.WriteLine("\nMetode Pembayaran:");
+            Console.WriteLine("1. Tunai\n2. BCA\n3. BNI\n4. Mandiri\n5. BRI\n6. ShopeePay\n7. GoPay\n8. Dana");
+
+            int metode = 0;
+            while (true)
+            {
+                Console.Write("Pilih metode (1-8): ");
+                if (int.TryParse(Console.ReadLine(), out metode) && metode >= 1 && metode <= 8)
+                    break;
+                Console.WriteLine("Input metode tidak valid. Silakan pilih angka 1 sampai 8.");
+            }
+
+            Pembayaran selectedMethod = (Pembayaran)(metode - 1);
+
+            PembayaranInfo info = PembayaranTable[selectedMethod];
+
+            if (nominal < info.MinimalPenarikan)
+            {
+                Console.WriteLine($"Minimal penarikan untuk metode ini adalah {info.MinimalPenarikan}.\n");
                 return;
             }
 
-            decimal totalDiterima = nominal - bankInfo.BiayaAdmin;
-            if (totalDiterima <= 0)
-            {
-                Console.WriteLine("Jumlah penarikan tidak mencukupi setelah potongan biaya admin.");
-                Console.ReadKey();
-                return;
-            }
+            decimal totalDiterima = nominal - info.BiayaAdmin;
+            Console.WriteLine($"Jumlah yang akan diterima setelah dipotong biaya admin ({info.BiayaAdmin}): {totalDiterima}");
 
-            Console.WriteLine($"\nMetode pembayaran terpilih : {selectedBank}");
-            Console.WriteLine($"Biaya admin: {bankInfo.BiayaAdmin}");
-            Console.WriteLine($"Jumlah yang akan diterima setelah potongan biaya admin: {totalDiterima}");
+            // Buat nyimpen PenarikanDatanya
+            RiwayatPenarikan.Add(new PenarikanData(rekening, nominal, selectedMethod));
+            currentState = StateBasedPenarikan.GetNextState(currentState, PenarikanTrigger.SUBMIT);
 
-
-            currentState = PenarikanState.MENUNGGU_APPROVAL;
-            //PenarikanAdmin.ProsesPenarikan(ref currentState, selectedBank, nominal);
-
-            //if (currentState == PenarikanState.BERHASIL)
-            //{
-            //    Console.WriteLine("\nPenarikan berhasil dikirim!");
-            //}
-            //else if (currentState == PenarikanState.DITOLAK)
-            //{
-            //    Console.WriteLine("\nPenarikan ditolak oleh admin.");
-            //}
-
+            Console.WriteLine($"Status penarikan sekarang: {currentState}");
             Console.WriteLine("\nMemproses penarikan, mohon tunggu...");
             Thread.Sleep(2000);
 
             currentState = PenarikanState.BERHASIL;
             Console.WriteLine("\nPenarikan berhasil dikirim ke rekening Anda!");
-            Console.WriteLine($"Total diterima: {totalDiterima} ({selectedBank})");
+            Console.WriteLine($"Total diterima: {totalDiterima} ({selectedMethod})");
 
             Console.WriteLine("\nTekan sembarang tombol untuk keluar...");
             Console.ReadKey();

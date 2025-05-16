@@ -41,8 +41,8 @@ namespace TugasBesar_KPL_2425_Kelompok_4.UserProgram
                             jadwalService.ViewJadwal();
                             break;
                         case 2:
-
-                            PenarikanCustomer.StateBasedPenarikanCustomer();
+                            PenarikanState state = PenarikanState.MEMASUKKAN_DATA;
+                            PenarikanCustomer.ProsesPenarikan(ref state);
                             break;
                         case 3:
                             configPendaftaraanArea.DaftarkanAreaPengambilan();

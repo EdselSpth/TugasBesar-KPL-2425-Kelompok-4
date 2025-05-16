@@ -40,8 +40,9 @@ namespace TugasBesar_KPL_2425_Kelompok_4.UserProgram
                             DeleteFlow();
                             break;
                         case 5:
-                            PenarikanState currentState = PenarikanState.MEMASUKKAN_DATA;
-                            PenarikanAdmin.ProsesPenarikan(ref currentState, Pembayaran.Bca, 100000);
+                            PenarikanAdmin.TampilkanDataPenarikanCustomer();
+                            PenarikanState state = PenarikanState.MEMASUKKAN_DATA;
+                            PenarikanAdmin.ProsesPenarikan(ref state);
                             break;
                         case 6:
                             Console.WriteLine("Terima kasih sudah menggunakan aplikasi\n");
