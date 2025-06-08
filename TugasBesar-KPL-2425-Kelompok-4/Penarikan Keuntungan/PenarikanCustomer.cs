@@ -3,7 +3,7 @@ using static TugasBesar_KPL_2425_Kelompok_4.Penarikan_Keuntungan.StateBasedPenar
 using TugasBesar_KPL_2425_Kelompok_4.Penarikan_Keuntungan;
 namespace TugasBesar_KPL_2425_Kelompok_4.Penarikan_Keuntungan
 {
-    public static class PenarikanCustomer
+    public class PenarikanCustomer
     {
         public static List<PenarikanData> RiwayatPenarikan = new();
 

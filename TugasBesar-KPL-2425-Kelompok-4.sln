@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoginAPI", "LoginAPI\LoginA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject1", "TestProject1\TestProject1.csproj", "{F4FE36E5-2358-4A79-9869-7F515A9F67B6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormPenarikanKeuntungan", "FormPenarikanKeuntungan\FormPenarikanKeuntungan.csproj", "{0F92BA6E-F0EE-46BA-A773-7F6D52635638}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{F4FE36E5-2358-4A79-9869-7F515A9F67B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4FE36E5-2358-4A79-9869-7F515A9F67B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F4FE36E5-2358-4A79-9869-7F515A9F67B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F92BA6E-F0EE-46BA-A773-7F6D52635638}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F92BA6E-F0EE-46BA-A773-7F6D52635638}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F92BA6E-F0EE-46BA-A773-7F6D52635638}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F92BA6E-F0EE-46BA-A773-7F6D52635638}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
